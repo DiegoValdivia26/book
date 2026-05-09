@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diego Valdivia — Growth Systems · Performance · Product</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&family=JetBrains+Mono:wght@300;400;500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4efe6;
+  --bg-alt: #ebe4d6;
+  --ink: #161412;
+  --ink-soft: #3d3833;
+  --ink-mute: #6b635a;
+  --rule: #d8cfbe;
+  --accent: #c0432a;
+  --accent-deep: #8a2912;
+  --accent-soft: #f4d3c5;
+  --paper: #fbf8f1;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter Tight', -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+::selection { background: var(--accent); color: var(--paper); }
+
+a { color: inherit; text-decoration: none; }
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.serif {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 3rem;
+  mix-blend-mode: multiply;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nav-logo {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+}
+
+.nav-logo span { color: var(--accent); }
+
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { position: relative; transition: color 0.3s; }
+.nav-links a:hover { color: var(--accent); }
+
+@media (max-width: 720px) {
+  .nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  padding: 7rem 3rem 4rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: end;
+}
+
+.hero-meta {
+  position: absolute;
+  top: 7rem;
+  right: 3rem;
+  text-align: right;
+  max-width: 280px;
+}
+
+.hero-meta .mono { color: var(--ink-mute); display: block; margin-bottom: 0.4rem; }
+.hero-meta-body {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 2.5rem;
+  color: var(--ink-mute);
+}
+.hero-tag::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(3.2rem, 9vw, 9rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  margin-bottom: 2rem;
+  max-width: 1100px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.hero h1 .stroke {
+  -webkit-text-stroke: 1.5px var(--ink);
+  color: transparent;
+  font-weight: 600;
+}
+
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: end;
+  border-top: 1px solid var(--rule);
+  padding-top: 2rem;
+  margin-top: 3rem;
+}
+
+.hero-lede {
+  max-width: 540px;
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+}
+
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 2.6rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--accent);
+  font-variation-settings: "opsz" 144, "WONK" 1;
+}
+
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 720px) {
+  .hero { padding: 6rem 1.5rem 3rem; }
+  .hero-meta { position: static; text-align: left; margin-bottom: 2rem; max-width: none; }
+  .hero-bottom { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  .stat-num { font-size: 2rem; }
+}
+
+/* ===== SECTION SHELL ===== */
+section {
+  padding: 7rem 3rem;
+  position: relative;
+}
+
+@media (max-width: 720px) {
+  section { padding: 4rem 1.5rem; }
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2rem;
+  align-items: baseline;
+  margin-bottom: 4rem;
+  border-top: 1px solid var(--ink);
+  padding-top: 1.2rem;
+}
+
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.section-head h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+  max-width: 900px;
+}
+
+.section-head h2 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+@media (max-width: 720px) {
+  .section-head { grid-template-columns: 1fr; gap: 0.8rem; margin-bottom: 2.5rem; }
+}
+
+/* ===== ABOUT ===== */
+.about {
+  background: var(--paper);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+}
+
+.about-prose p {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  margin-bottom: 1.4rem;
+  color: var(--ink-soft);
+}
+
+.about-prose p:first-child {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: var(--ink);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+}
+
+.about-prose p:first-child::first-letter {
+  font-size: 4.2rem;
+  float: left;
+  line-height: 0.85;
+  padding: 0.3rem 0.6rem 0 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+}
+
+.expertise-list {
+  list-style: none;
+}
+
+.expertise-list li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 1.2rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+.expertise-list li:first-child { border-top: 1px solid var(--rule); }
+
+.exp-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--ink-mute);
+}
+
+.exp-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+}
+
+@media (max-width: 720px) {
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-prose p:first-child { font-size: 1.3rem; }
+}
+
+/* ===== SPECIALTIES ===== */
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border: 1px solid var(--ink);
+}
+
+.spec-card {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  transition: background 0.4s, color 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.spec-card:nth-child(2n) { border-right: none; }
+.spec-card:nth-last-child(-n+2) { border-bottom: none; }
+
+.spec-card:hover { background: var(--ink); color: var(--paper); }
+.spec-card:hover .spec-num { color: var(--accent); }
+.spec-card:hover .spec-tag-list span { border-color: var(--paper); color: var(--paper); }
+
+.spec-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.spec-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.7rem;
+  line-height: 1.05;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+}
+
+.spec-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.spec-tag-list span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--ink);
+  border-radius: 99px;
+  transition: all 0.3s;
+}
+
+@media (max-width: 720px) {
+  .specs-grid { grid-template-columns: 1fr; }
+  .spec-card { border-right: none !important; border-bottom: 1px solid var(--ink) !important; }
+  .spec-card:last-child { border-bottom: none !important; }
+}
+
+/* ===== PROJECTS ===== */
+.projects {
+  background: var(--paper);
+}
+
+.project {
+  border-top: 1px solid var(--ink);
+  padding: 3rem 0;
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  gap: 3rem;
+  position: relative;
+  cursor: pointer;
+  transition: padding 0.4s ease;
+}
+
+.project:last-child { border-bottom: 1px solid var(--ink); }
+
+.project:hover { padding-left: 2rem; }
+
+.project::after {
+  content: '↗';
+  position: absolute;
+  right: 0;
+  top: 3rem;
+  font-size: 1.6rem;
+  font-family: 'Fraunces', serif;
+  color: var(--accent);
+  transition: transform 0.4s;
+}
+
+.project:hover::after { transform: translate(6px, -6px) rotate(8deg); }
+
+.proj-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-mute);
+}
+
+.proj-title h3 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.95;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.6rem;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+}
+
+.proj-title h3 em { font-style: italic; color: var(--accent); font-weight: 300; }
+
+.proj-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.proj-body {
+  padding-right: 3rem;
+}
+
+.proj-desc {
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 1.4rem;
+}
+
+.proj-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.proj-meta strong {
+  color: var(--ink);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.proj-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--bg-alt);
+  border-left: 3px solid var(--accent);
+  margin-bottom: 1.4rem;
+}
+
+.proj-metric-num {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--accent);
+  line-height: 1;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  white-space: nowrap;
+}
+
+.proj-metric-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+@media (max-width: 720px) {
+  .project { grid-template-columns: 1fr; gap: 1.2rem; padding: 2.5rem 0; }
+  .project:hover { padding-left: 0; }
+  .project::after { display: none; }
+  .proj-body { padding-right: 0; }
+}
+
+/* ===== PHILOSOPHY ===== */
+.philosophy {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.philosophy .section-head { border-top-color: var(--paper); }
+.philosophy .section-head h2 em { color: var(--accent-soft); }
+
+.phil-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem 5rem;
+}
+
+.phil-item {
+  position: relative;
+}
+
+.phil-num {
+  font-family: 'Fraunces', serif;
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.phil-item h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+}
+
+.phil-item p {
+  color: rgba(251, 248, 241, 0.7);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .phil-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+/* ===== CLIENTS ===== */
+.clients {
+  background: var(--paper);
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--ink);
+}
+
+.client-cell {
+  padding: 2.5rem 1.5rem;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  text-align: center;
+  position: relative;
+  transition: background 0.3s, color 0.3s;
+}
+
+.client-cell:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.client-cell:hover .client-cat { color: var(--accent-soft); }
+
+.client-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+
+.client-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  transition: color 0.3s;
+}
+
+.clients-note {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  padding: 2rem;
+  background: var(--bg-alt);
+  border-left: 3px solid var(--accent);
+}
+
+.clients-note .mono { color: var(--accent); display: block; margin-bottom: 0.5rem; }
+
+.clients-note-val {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.2;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+}
+
+.clients-note-val em { font-style: italic; color: var(--accent); }
+
+@media (max-width: 720px) {
+  .clients-grid { grid-template-columns: repeat(2, 1fr); }
+  .client-name { font-size: 1.3rem; }
+  .clients-note { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; }
+  .clients-note-val { font-size: 1.2rem; }
+}
+
+/* ===== PROCESS ===== */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  position: relative;
+}
+
+.process-grid::before {
+  content: '';
+  position: absolute;
+  top: 38px;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: var(--rule);
+  z-index: 0;
+}
+
+.process-step {
+  position: relative;
+  z-index: 1;
+}
+
+.process-marker {
+  width: 76px;
+  height: 76px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  transition: all 0.4s;
+}
+
+.process-step:hover .process-marker {
+  background: var(--accent);
+  color: var(--paper);
+  transform: rotate(-8deg) scale(1.05);
+}
+
+.process-step h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.7rem;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+}
+
+.process-step p {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+  .process-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .process-grid::before { display: none; }
+}
+
+/* ===== TEACHING ===== */
+.teaching {
+  background: var(--bg-alt);
+  position: relative;
+  overflow: hidden;
+}
+
+.teaching::before {
+  content: 'EBC';
+  position: absolute;
+  right: -2rem;
+  bottom: -4rem;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(12rem, 28vw, 26rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--accent);
+  opacity: 0.08;
+  line-height: 1;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  pointer-events: none;
+}
+
+.teaching-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 5rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.teaching-num {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(8rem, 18vw, 16rem);
+  font-weight: 300;
+  line-height: 0.85;
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: -0.06em;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.teaching-num-suffix {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  margin-top: 0.5rem;
+  font-variation-settings: normal;
+}
+
+.teaching-body h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 2.2rem;
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.2rem;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+}
+
+.teaching-body h3 em { font-style: italic; color: var(--accent); font-weight: 300; }
+
+.teaching-body p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+.teaching-meta {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--ink);
+  border-radius: 99px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 720px) {
+  .teaching-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .teaching-body h3 { font-size: 1.6rem; }
+}
+
+/* ===== STACK ===== */
+.stack-marquee {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  overflow: hidden;
+  padding: 1.2rem 0;
+  margin-bottom: 5rem;
+  background: var(--bg-alt);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: scroll 40s linear infinite;
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.marquee-track span:nth-child(odd) { color: var(--accent); }
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.stack-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--ink);
+}
+
+.stack-col {
+  padding: 2rem 1.8rem;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.stack-col:nth-child(3n) { border-right: none; }
+.stack-col:nth-last-child(-n+3) { border-bottom: none; }
+
+.stack-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.stack-col-num {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--ink-mute);
+  margin-bottom: 1.5rem;
+  display: block;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+}
+
+.stack-col ul { list-style: none; }
+.stack-col li {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.45rem 0;
+  border-bottom: 1px dotted var(--rule);
+  font-variation-settings: "opsz" 144, "WONK" 1;
+}
+
+.stack-col li:last-child { border-bottom: none; }
+
+@media (max-width: 720px) {
+  .stack-cols { grid-template-columns: 1fr; }
+  .stack-col {
+    border-right: none !important;
+    border-bottom: 1px solid var(--ink) !important;
+  }
+  .stack-col:last-child { border-bottom: none !important; }
+}
+
+/* ===== CTA ===== */
+.cta {
+  background: var(--accent);
+  color: var(--paper);
+  padding: 8rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top right, rgba(255,255,255,0.15), transparent 50%);
+  pointer-events: none;
+}
+
+.cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.cta .mono { color: rgba(251, 248, 241, 0.7); }
+
+.cta h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.4rem, 7vw, 6rem);
+  line-height: 0.95;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  margin: 1.5rem 0 3rem;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+}
+
+.cta h2 em { font-style: italic; }
+
+.cta-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 1.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--paper);
+  background: transparent;
+  color: var(--paper);
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 99px;
+}
+
+.btn-primary {
+  background: var(--paper);
+  color: var(--accent);
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.btn-primary:hover {
+  background: var(--ink);
+}
+
+.cta-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(251, 248, 241, 0.3);
+}
+
+.cta-meta .mono { display: block; margin-bottom: 0.4rem; }
+.cta-meta-val {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+}
+
+@media (max-width: 720px) {
+  .cta { padding: 5rem 1.5rem; }
+  .cta-meta { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 2.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  border-top: 1px solid var(--rule);
+}
+
+footer .pulse {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+@media (max-width: 720px) {
+  footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; text-align: center; }
+}
+
+/* ===== ENTRANCE ANIMATION ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.45s; }
+.delay-4 { animation-delay: 0.6s; }
+.delay-5 { animation-delay: 0.75s; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">DV<span>.</span></div>
+  <div class="nav-links">
+    <a href="#about">Sobre mí</a>
+    <a href="#clients">Clientes</a>
+    <a href="#projects">Proyectos</a>
+    <a href="#process">Proceso</a>
+    <a href="#contact">Contacto</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-meta fade-up">
+    <span class="mono">Edición · 2026</span>
+    <p class="hero-meta-body">Marketing Manager · Performance & Growth Operator basado en Latinoamérica con scope global.</p>
+  </div>
+
+  <div>
+    <div class="hero-tag mono fade-up">Portfolio · Diego Valdivia</div>
+
+    <h1 class="fade-up delay-1">
+      Construyo <em>sistemas</em><br>
+      de <span class="stroke">crecimiento</span><br>
+      que escalan.
+    </h1>
+
+    <div class="hero-bottom fade-up delay-2">
+      <p class="hero-lede">
+        Performance marketer y eCommerce strategist. Diseño infraestructura de crecimiento para marcas DTC, marketplaces y productos de tecnología — donde el media buying es solo una capa de un sistema mayor: producto, conversión, atribución y creativo, operando juntos.
+      </p>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">$16M</div>
+          <div class="stat-label">MXN / mes peak</div>
+        </div>
+        <div>
+          <div class="stat-num">9</div>
+          <div class="stat-label">Años docencia EBC</div>
+        </div>
+        <div>
+          <div class="stat-num">3</div>
+          <div class="stat-label">Mercados activos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="section-head">
+    <span class="section-num mono">§ 01 — Perfil</span>
+    <h2>Estratega y operador a la <em>vez</em>.</h2>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-prose">
+      <p>Mi trabajo se mueve en la intersección de growth, producto, performance y sistemas. Diseño infraestructura digital que combina paid media, optimización de conversión, arquitectura de tracking y estrategia creativa.</p>
+
+      <p>He gestionado y optimizado presupuestos publicitarios de alto volumen en Meta, Google, TikTok, Amazon y Mercado Libre, mientras paralelamente construyo la infraestructura técnica de tracking que hace posible la atribución a escala.</p>
+
+      <p>Más allá del media buying, mi trabajo abarca arquitectura Shopify, sistemas de CRO, server-side tracking, frameworks UGC, expansión internacional y marketplace growth. Opero como estratega-operador: retengo control sobre las áreas de alto apalancamiento y delego ejecución acotada.</p>
+    </div>
+
+    <ol class="expertise-list">
+      <li><span class="exp-num mono">01</span><span class="exp-name">Performance Marketing</span></li>
+      <li><span class="exp-num mono">02</span><span class="exp-name">Shopify & Shopify Plus</span></li>
+      <li><span class="exp-num mono">03</span><span class="exp-name">CRO & Funnel Optimization</span></li>
+      <li><span class="exp-num mono">04</span><span class="exp-name">Server-side Tracking</span></li>
+      <li><span class="exp-num mono">05</span><span class="exp-name">Product Strategy</span></li>
+      <li><span class="exp-num mono">06</span><span class="exp-name">Attribution Architecture</span></li>
+      <li><span class="exp-num mono">07</span><span class="exp-name">UGC & Creative Systems</span></li>
+      <li><span class="exp-num mono">08</span><span class="exp-name">Marketplace Growth</span></li>
+      <li><span class="exp-num mono">09</span><span class="exp-name">Startup & Mobility Products</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== SPECIALTIES ===== -->
+<section id="specialties">
+  <div class="section-head">
+    <span class="section-num mono">§ 02 — Especialidades</span>
+    <h2>Cuatro disciplinas, un <em>solo sistema</em>.</h2>
+  </div>
+
+  <div class="specs-grid">
+    <article class="spec-card">
+      <span class="spec-num">01 / Acquisition</span>
+      <h3>Performance<br>Marketing</h3>
+      <div class="spec-tag-list">
+        <span>Meta Ads</span><span>Google Ads</span><span>TikTok</span><span>Amazon Ads</span><span>MercadoLibre</span><span>Full-funnel</span><span>Lead Gen</span><span>CAC / ROAS</span>
+      </div>
+    </article>
+
+    <article class="spec-card">
+      <span class="spec-num">02 / Infrastructure</span>
+      <h3>Tracking<br>& Analytics</h3>
+      <div class="spec-tag-list">
+        <span>GA4</span><span>GTM Web + Server</span><span>Meta CAPI</span><span>TikTok Events API</span><span>Enhanced Conv.</span><span>Event Dedup</span><span>Data Layer</span>
+      </div>
+    </article>
+
+    <article class="spec-card">
+      <span class="spec-num">03 / Conversion</span>
+      <h3>Shopify<br>& CRO</h3>
+      <div class="spec-tag-list">
+        <span>Shopify Plus</span><span>Theme Custom.</span><span>PDP Optim.</span><span>Bundles</span><span>Liquid</span><span>A/B Testing</span><span>Mobile-first</span>
+      </div>
+    </article>
+
+    <article class="spec-card">
+      <span class="spec-num">04 / Strategy</span>
+      <h3>Growth<br>& Product</h3>
+      <div class="spec-tag-list">
+        <span>Positioning</span><span>Offer Strategy</span><span>UGC Frameworks</span><span>Growth Loops</span><span>PMF</span><span>Mobility</span><span>Monetization</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== CLIENTS ===== -->
+<section class="clients" id="clients">
+  <div class="section-head">
+    <span class="section-num mono">§ 03 — Clientes</span>
+    <h2>Marcas que han confiado en mi <em>trabajo</em>.</h2>
+  </div>
+
+  <div class="clients-grid">
+    <div class="client-cell">
+      <div class="client-name">Miniso</div>
+      <div class="client-cat">Retail · Lifestyle</div>
+    </div>
+    <div class="client-cell">
+      <div class="client-name">L'Oréal</div>
+      <div class="client-cat">Beauty · Personal Care</div>
+    </div>
+    <div class="client-cell">
+      <div class="client-name">Aldo Conti</div>
+      <div class="client-cat">Fashion · Apparel</div>
+    </div>
+    <div class="client-cell">
+      <div class="client-name">Shasa</div>
+      <div class="client-cat">Fashion · Womenswear</div>
+    </div>
+    <div class="client-cell">
+      <div class="client-name">Farmatodo</div>
+      <div class="client-cat">Pharmacy · Retail</div>
+    </div>
+    <div class="client-cell">
+      <div class="client-name">Tiendas 3B</div>
+      <div class="client-cat">Hard Discount · Retail</div>
+    </div>
+  </div>
+
+  <div class="clients-note">
+    <div>
+      <span class="mono">Presupuestos gestionados</span>
+      <div class="clients-note-val">Desde $30K hasta <em>$16M MXN</em> mensuales en paid media.</div>
+    </div>
+    <div>
+      <span class="mono">Proyectos in-house</span>
+      <div class="clients-note-val">MonkeyHands, Ilhũ Care, BPN Pro, PlayCity, <em>Viax</em> (founder).</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section class="projects" id="projects">
+  <div class="section-head">
+    <span class="section-num mono">§ 04 — Marcas & Proyectos</span>
+    <h2>Selección de trabajos <em>recientes</em>.</h2>
+  </div>
+
+  <article class="project">
+    <span class="proj-num">01</span>
+    <div class="proj-title">
+      <h3>Monkey<br><em>Hands</em></h3>
+      <span class="proj-cat">Calistenia · Climbing · Functional Sports</span>
+    </div>
+    <div class="proj-body">
+      <div class="proj-metric">
+        <span class="proj-metric-num">4× – 7×</span>
+        <span class="proj-metric-label">ROAS sostenido<br>en MercadoLibre MX</span>
+      </div>
+      <p class="proj-desc">Marca global de grip para deportes funcionales. Construí sistemas de UGC multi-deporte, arquitectura de bundles, configurador de producto y estructura de PDP enfocada en conversión. B2B EU con <strong>~94 días de reorder cycle</strong> y LTV alto en cuentas recurrentes — la retención B2B es la palanca de mayor valor.</p>
+      <div class="proj-meta">
+        <div><strong>Mercados</strong>MX · EU · USA</div>
+        <div><strong>Stack</strong>Shopify Plus · Klaviyo · MeLi</div>
+        <div><strong>Foco</strong>B2B retención · DTC scale</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="project">
+    <span class="proj-num">02</span>
+    <div class="proj-title">
+      <h3>Ilhũ<br><em>Care</em></h3>
+      <span class="proj-cat">Premium Organic Personal Care</span>
+    </div>
+    <div class="proj-body">
+      <div class="proj-metric">
+        <span class="proj-metric-num">D2C</span>
+        <span class="proj-metric-label">Posicionamiento editorial<br>+ arquitectura SEO de cero</span>
+      </div>
+      <p class="proj-desc">Marca de cuidado personal con posicionamiento editorial-dermocosmético premium. Trabajé branding, dirección visual, optimización Shopify, arquitectura SEO de colecciones, storytelling de ingredientes y sistemas CRO con foco en objection handling y diferenciación funcional.</p>
+      <div class="proj-meta">
+        <div><strong>Categorías</strong>Hair · Skin · Sun · Lip</div>
+        <div><strong>Estilo</strong>Editorial · Minimalista</div>
+        <div><strong>Foco</strong>Trust · Education · Conversion</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="project">
+    <span class="proj-num">03</span>
+    <div class="proj-title">
+      <h3>Play<br><em>City</em></h3>
+      <span class="proj-cat">Performance & Tracking Infrastructure</span>
+    </div>
+    <div class="proj-body">
+      <div class="proj-metric">
+        <span class="proj-metric-num">+20%</span>
+        <span class="proj-metric-label">Ticket promedio<br>+ mejora en FTD y CAC</span>
+      </div>
+      <p class="proj-desc">Implementé tracking híbrido web + server-side, arquitectura GA4, deduplicación de eventos y Enhanced Conversions. La mejora en <strong>event match quality</strong> post server-side recuperó señal perdida y permitió optimización más precisa: mejor atribución, mejor CAC, mejor FTD y un alza del ~20% en ticket promedio.</p>
+      <div class="proj-meta">
+        <div><strong>Stack</strong>GA4 · GTM Server · CAPI · TikTok</div>
+        <div><strong>KPIs</strong>FTD · CAC · AOV · Match Quality</div>
+        <div><strong>Foco</strong>Atribución limpia · Escala</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="project">
+    <span class="proj-num">04</span>
+    <div class="proj-title">
+      <h3>BPN<br><em>Pro</em></h3>
+      <span class="proj-cat">Supplements & Wellness</span>
+    </div>
+    <div class="proj-body">
+      <div class="proj-metric">
+        <span class="proj-metric-num">DTC</span>
+        <span class="proj-metric-label">Sistemas de creative testing<br>+ bundle logic</span>
+      </div>
+      <p class="proj-desc">Sistemas de creative testing alrededor de sleep, focus y adaptógenos. Diseñé bundle discount logic, frameworks de ángulos creativos para Meta, secuenciación de ofertas y educación de producto orientada a stack de suplementación.</p>
+      <div class="proj-meta">
+        <div><strong>Categoría</strong>Supplements · Functional</div>
+        <div><strong>Canales</strong>Meta Ads</div>
+        <div><strong>Foco</strong>Bundles · Creative angles</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="project">
+    <span class="proj-num">05</span>
+    <div class="proj-title">
+      <h3>Viax<br><em>(Founder)</em></h3>
+      <span class="proj-cat">Mobility · Trusted Carpooling</span>
+    </div>
+    <div class="proj-body">
+      <div class="proj-metric">
+        <span class="proj-metric-num">0 → 1</span>
+        <span class="proj-metric-label">Producto, marca y modelo<br>diseñados de cero</span>
+      </div>
+      <p class="proj-desc">"Comparte el camino." Plataforma de carpooling urbano basada en grafo social. En lugar de matchear extraños, prioriza rides según contactos directos, conexiones mutuas y densidad de relación. Trabajé naming, branding, arquitectura de producto, lógica del trust system multi-nivel y modelo de negocio.</p>
+      <div class="proj-meta">
+        <div><strong>Mercado</strong>CDMX</div>
+        <div><strong>Modelo</strong>Trust-based matching</div>
+        <div><strong>Stage</strong>Pre-MVP · Branding done</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===== PHILOSOPHY ===== -->
+<section class="philosophy">
+  <div class="section-head">
+    <span class="section-num mono" style="color: var(--paper);">§ 05 — Filosofía</span>
+    <h2>Cómo pienso el <em>crecimiento</em>.</h2>
+  </div>
+
+  <div class="phil-grid">
+    <div class="phil-item">
+      <div class="phil-num">i.</div>
+      <h3>Growth is a system.</h3>
+      <p>El performance no es solo media buying. El crecimiento sostenible alinea posicionamiento, creativo, conversión, tracking, psicología del funnel y experiencia de cliente — operando como una sola arquitectura.</p>
+    </div>
+
+    <div class="phil-item">
+      <div class="phil-num">ii.</div>
+      <h3>Velocity beats volume.</h3>
+      <p>La ventaja competitiva moderna está en cuán rápido puedes generar ideas, validar ángulos y aprender de la data creativa. Volumen sin iteración es contraproducente — primero se prueban 5–10 ángulos ganadores, después se escala.</p>
+    </div>
+
+    <div class="phil-item">
+      <div class="phil-num">iii.</div>
+      <h3>Attribution matters.</h3>
+      <p>Infraestructura de datos confiable cambia las decisiones. Priorizo arquitectura de eventos limpia, server-side tracking, deduplicación y consistencia cross-platform. Sin data hygiene, todo el resto es ruido.</p>
+    </div>
+
+    <div class="phil-item">
+      <div class="phil-num">iv.</div>
+      <h3>Fix product first.</h3>
+      <p>Incluso en paid acquisition, la claridad de producto manda. Si el ROAS está roto a nivel producto, escalar spend solo compone pérdidas. Posicionamiento claro, propuesta de valor diferenciada y fricción reducida son prerrequisitos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section id="process">
+  <div class="section-head">
+    <span class="section-num mono">§ 06 — Cómo trabajo</span>
+    <h2>Proceso en <em>cuatro fases</em>.</h2>
+  </div>
+
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="process-marker">i</div>
+      <h4>Audit</h4>
+      <p>Diagnóstico completo: tracking, atribución, embudo de conversión, creativo y posicionamiento. Sin diagnóstico no hay estrategia, solo opinión.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-marker">ii</div>
+      <h4>Sistema</h4>
+      <p>Diseño de la arquitectura: data layer, structure de campañas, framework creativo y CRO roadmap. Lo que va a ser repetible y escalable.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-marker">iii</div>
+      <h4>Ejecución</h4>
+      <p>Implementación con foco quirúrgico. Yo retengo lo de alto apalancamiento; delego ejecución acotada a freelancers cuando aplica.</p>
+    </div>
+    <div class="process-step">
+      <div class="process-marker">iv</div>
+      <h4>Iteración</h4>
+      <p>Validar ángulos antes de escalar volumen. Lectura de data, ajuste de hipótesis y compounding semanal. Velocidad, no urgencia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TEACHING ===== -->
+<section class="teaching">
+  <div class="section-head">
+    <span class="section-num mono">§ 07 — Docencia</span>
+    <h2>Enseñar también es <em>operar</em>.</h2>
+  </div>
+
+  <div class="teaching-grid">
+    <div class="teaching-num">
+      9
+      <span class="teaching-num-suffix">Años · Escuela Bancaria Comercial</span>
+    </div>
+    <div class="teaching-body">
+      <h3>Docente activo en <em>EBC</em>.</h3>
+      <p>Nueve años formando a la siguiente generación de profesionales en marketing digital, analítica y eCommerce. La docencia me obliga a sistematizar lo que aprendo en operación — y a mantener un punto de vista propio sobre la disciplina.</p>
+      <p>Lo que practico en proyectos lo destilo en aulas; lo que cuestiono en aulas lo refino en proyectos. Es el mejor feedback loop que tengo.</p>
+      <span class="teaching-meta">2017 — Presente · Activo</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STACK ===== -->
+<section>
+  <div class="section-head">
+    <span class="section-num mono">§ 08 — Stack</span>
+    <h2>Herramientas, organizadas por <em>capa</em>.</h2>
+  </div>
+
+  <div class="stack-cols">
+    <div class="stack-col">
+      <h4>Performance</h4>
+      <span class="stack-col-num">i. Acquisition</span>
+      <ul>
+        <li>Meta Ads Manager</li>
+        <li>Google Ads</li>
+        <li>TikTok Ads</li>
+        <li>YouTube Ads</li>
+        <li>Pinterest Ads</li>
+      </ul>
+    </div>
+
+    <div class="stack-col">
+      <h4>Marketplace</h4>
+      <span class="stack-col-num">ii. Channels</span>
+      <ul>
+        <li>Amazon Advertising</li>
+        <li>Amazon Seller Central</li>
+        <li>MercadoLibre Ads</li>
+        <li>MercadoLibre Seller</li>
+        <li>Walmart Connect</li>
+      </ul>
+    </div>
+
+    <div class="stack-col">
+      <h4>Analytics & Tracking</h4>
+      <span class="stack-col-num">iii. Infrastructure</span>
+      <ul>
+        <li>GA4</li>
+        <li>GTM Web + Server</li>
+        <li>Meta CAPI</li>
+        <li>TikTok Events API</li>
+        <li>Enhanced Conversions</li>
+      </ul>
+    </div>
+
+    <div class="stack-col">
+      <h4>eCommerce & CRO</h4>
+      <span class="stack-col-num">iv. Conversion</span>
+      <ul>
+        <li>Shopify / Shopify Plus</li>
+        <li>VTEX</li>
+        <li>Magento</li>
+        <li>WordPress / WooCommerce</li>
+        <li>Tiendanube</li>
+        <li>Liquid</li>
+        <li>Microsoft Clarity</li>
+        <li>Hotjar</li>
+        <li>VWO / A/B testing</li>
+      </ul>
+    </div>
+
+    <div class="stack-col">
+      <h4>CRM & Email</h4>
+      <span class="stack-col-num">v. Retention</span>
+      <ul>
+        <li>Klaviyo</li>
+        <li>Mailchimp</li>
+        <li>Odoo CRM</li>
+        <li>HubSpot</li>
+        <li>Segmentation systems</li>
+      </ul>
+    </div>
+
+    <div class="stack-col">
+      <h4>Productividad & AI</h4>
+      <span class="stack-col-num">vi. Operations</span>
+      <ul>
+        <li>Claude</li>
+        <li>ChatGPT</li>
+        <li>Gemini</li>
+        <li>HeyGen</li>
+        <li>Notion</li>
+        <li>Loom</li>
+        <li>Figma</li>
+        <li>Canva Pro</li>
+        <li>Foreplay</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta" id="contact">
+  <div class="cta-inner">
+    <span class="mono">§ 09 — Contacto</span>
+    <h2>Construyamos un<br>sistema que <em>escale.</em></h2>
+
+    <div class="cta-actions">
+      <a href="mailto:diegovaldivia26@gmail.com" class="btn btn-primary">
+        diegovaldivia26@gmail.com →
+      </a>
+      <a href="https://www.linkedin.com/in/soydiegovaldivia/" target="_blank" rel="noopener" class="btn">
+        LinkedIn ↗
+      </a>
+    </div>
+
+    <div class="cta-meta">
+      <div>
+        <span class="mono">Disponibilidad</span>
+        <div class="cta-meta-val">Consulting · Strategic projects</div>
+      </div>
+      <div>
+        <span class="mono">Mercados</span>
+        <div class="cta-meta-val">MX · EU · USA</div>
+      </div>
+      <div>
+        <span class="mono">Idiomas</span>
+        <div class="cta-meta-val">Español · English</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><span class="pulse"></span>Disponible para nuevos proyectos · 2026</div>
+  <div>© Diego Valdivia — Growth Systems</div>
+</footer>
+
+</body>
+</html>
