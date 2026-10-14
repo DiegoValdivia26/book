@@ -3,621 +3,549 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diego Valdivia — Marketing Manager & eCommerce</title>
-<meta name="description" content="Marketing Manager. Campañas en Meta, Google, Amazon y Mercado Libre. Shopify y tracking.">
+<meta name="description" content="Diego Valdivia, Marketing Director. Performance, Amazon, Mercado Libre, Shopify y tracking para marcas en México, Europa y Estados Unidos.">
+<title>Diego Valdivia · Marketing Director</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* Layout: opción A (sobrio). Una sola familia, fondo blanco, azul solo en datos y acciones. Casos primero, listas en tabla */
 :root {
-  --bg: #f4efe6;
-  --bg-alt: #ebe4d6;
-  --paper: #fbf8f1;
-  --ink: #161412;
-  --ink-soft: #3d3833;
-  --ink-mute: #6b635a;
-  --rule: #d8cfbe;
-  --accent: #c0432a;
+  --bg: #ffffff;
+  --soft: #f5f6f8;
+  --ink: #121417;
+  --ink-2: #4b515a;
+  --ink-3: #7c828b;
+  --line: #e3e5e9;
+  --accent: #1a47b8;
+  --accent-tint: #e8eefb;
+  --up: #1d7a4a;
+  --warn: #b8432f;
+  --font: 'Manrope', -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1114; --soft: #171a1f; --ink: #eef0f3; --ink-2: #b4bac4; --ink-3: #828995;
+    --line: #272b32; --accent: #7fa2ff; --accent-tint: #1a2440; --up: #52c488; --warn: #f08a72; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1114; --soft: #171a1f; --ink: #eef0f3; --ink-2: #b4bac4; --ink-3: #828995;
+  --line: #272b32; --accent: #7fa2ff; --accent-tint: #1a2440; --up: #52c488; --warn: #f08a72; color-scheme: dark;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3, h4 { text-wrap: balance; letter-spacing: -0.03em; }
+p { max-width: 64ch; color: var(--ink-2); }
 
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Inter Tight', -apple-system, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
+.wrap { max-width: 1040px; margin: 0 auto; padding-inline: 2rem; }
+@media (max-width: 640px) { .wrap { padding-inline: 1rem; } }
 
-a { color: inherit; text-decoration: none; }
-a.link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-a.link:hover { text-decoration: none; }
-
-.mono {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* NAV */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--bg);
-  border-bottom: 1px solid var(--rule);
-  padding: 1.1rem 2.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-}
-
-.nav-logo { font-weight: 600; letter-spacing: -0.01em; }
-.nav-logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 1.8rem; }
-.nav-links a { color: var(--ink-soft); transition: color 0.15s; }
-.nav-links a:hover { color: var(--accent); }
-
-@media (max-width: 720px) {
-  .nav { padding: 1rem 1.25rem; }
-  .nav-links { display: none; }
-}
-
-/* WRAP */
-.wrap {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 0 2.5rem;
-}
-
-@media (max-width: 720px) {
-  .wrap { padding: 0 1.25rem; }
-}
+/* BARRA */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: var(--bg); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .85rem; }
+.bar-name { font-weight: 800; letter-spacing: -0.02em; text-decoration: none; }
+.bar nav { display: flex; gap: 1.5rem; font-size: .9rem; font-weight: 500; }
+.bar nav a { text-decoration: none; color: var(--ink-2); }
+.bar nav a:hover { color: var(--accent); }
+@media (max-width: 760px) { .bar nav { display: none; } }
+.status { display: inline-flex; align-items: center; gap: .45rem; font-size: .84rem; color: var(--ink-2); white-space: nowrap; }
+.status i { width: .5rem; height: .5rem; border-radius: 50%; background: var(--up); }
 
 /* HERO */
-.hero {
-  padding: 6rem 0 5rem;
+.hero { padding-block: 5rem 3rem; }
+.eyebrow { font-size: .92rem; font-weight: 500; color: var(--ink-3); margin-bottom: 1rem; }
+.hero h1 { font-size: clamp(2.6rem, 7vw, 4.4rem); font-weight: 800; line-height: 1; letter-spacing: -0.045em; }
+.hero-sub { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1.5rem 3rem; margin-top: 1.8rem; align-items: end; }
+@media (max-width: 760px) { .hero-sub { grid-template-columns: 1fr; } }
+.hero-sub .lede { font-size: 1.2rem; color: var(--ink); line-height: 1.5; font-weight: 500; }
+.hero-sub .role { font-size: .95rem; }
+
+.spec { margin-top: 3rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--soft); border-radius: 10px; }
+.spec div { padding: 1.2rem 1.3rem; }
+.spec div + div { border-left: 1px solid var(--line); }
+.spec dt { font-size: .82rem; color: var(--ink-3); font-weight: 500; }
+.spec dd { font-weight: 800; font-size: 1.45rem; letter-spacing: -0.03em; line-height: 1.2; margin-top: .25rem; }
+@media (max-width: 700px) {
+  .spec { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .spec div:nth-child(3) { border-left: none; }
+  .spec div:nth-child(n+3) { border-top: 1px solid var(--line); }
 }
 
-.hero-eyebrow {
-  color: var(--ink-mute);
-  margin-bottom: 1.5rem;
+/* SECCIONES */
+.sec { padding-block: 5rem 0; }
+.sec-title { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.sec-title h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 800; line-height: 1.1; }
+.sec-title span { font-size: .88rem; color: var(--ink-3); }
+
+/* CASO */
+.case { padding-bottom: 4rem; }
+.case + .case { padding-top: 4rem; border-top: 1px solid var(--line); }
+.case-top { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem 1.5rem; flex-wrap: wrap; }
+.case h3 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 800; line-height: 1.05; }
+.case-tags { font-size: .85rem; color: var(--ink-3); font-weight: 500; }
+.case-lead { margin-top: 1rem; font-size: 1.08rem; color: var(--ink); }
+
+.deltas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-block: 2rem 2.5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.delta { padding: 1.2rem 1.2rem 1.2rem 0; }
+.delta + .delta { padding-left: 1.2rem; border-left: 1px solid var(--line); }
+.delta b { display: block; font-weight: 800; font-size: clamp(1.6rem, 3.4vw, 2.2rem); line-height: 1; letter-spacing: -0.03em; color: var(--accent); }
+.delta span { display: block; font-size: .86rem; color: var(--ink-2); margin-top: .5rem; line-height: 1.45; }
+@media (max-width: 760px) {
+  .deltas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .delta:nth-child(3) { padding-left: 0; border-left: none; }
+  .delta:nth-child(n+3) { border-top: 1px solid var(--line); }
 }
 
-.hero h1 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(2.4rem, 5.5vw, 3.6rem);
-  line-height: 1.1;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.75rem;
-  max-width: 720px;
+.case-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 2.5rem; align-items: start; }
+@media (max-width: 860px) { .case-body { grid-template-columns: 1fr; } }
+.col h4 { font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: .5rem; }
+.col p + h4, .col ul + h4 { margin-top: 1.8rem; }
+.col ul { list-style: none; }
+.col li { padding: .55rem 0; border-bottom: 1px solid var(--line); color: var(--ink-2); font-size: .95rem; }
+.col li:last-child { border-bottom: none; }
+.stackline { margin-top: 1rem; font-size: .84rem; color: var(--ink-3); }
+
+/* GRAFICAS */
+figure.chart { background: var(--soft); border-radius: 10px; padding: 1.2rem 1.3rem 1.1rem; }
+figure.chart + figure.chart { margin-top: 1rem; }
+.chart-head { display: flex; justify-content: space-between; gap: .3rem 1rem; flex-wrap: wrap; margin-bottom: .8rem; font-size: .92rem; }
+.chart-head b { font-weight: 700; }
+.chart-head span { color: var(--ink-3); font-size: .82rem; }
+figure.chart svg { width: 100%; height: auto; display: block; }
+figcaption { font-size: .84rem; color: var(--ink-3); margin-top: .7rem; line-height: 1.5; }
+.g-grid { stroke: var(--line); stroke-width: 1; }
+.g-axis { fill: var(--ink-3); font-family: var(--font); font-size: 11px; font-weight: 500; }
+.g-val { fill: var(--ink); font-family: var(--font); font-size: 13px; font-weight: 700; }
+.g-lbl { fill: var(--ink); font-family: var(--font); font-size: 13px; font-weight: 600; }
+.g-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; }
+.g-area { fill: var(--accent); opacity: .12; }
+.g-dot { fill: var(--accent); }
+.g-bar { fill: var(--ink-3); opacity: .55; }
+.g-bar.hi { fill: var(--accent); opacity: 1; }
+.g-target { stroke: var(--warn); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.g-target-lbl { fill: var(--warn); font-family: var(--font); font-size: 11px; font-weight: 600; }
+
+.split { display: flex; height: 1.8rem; border-radius: 6px; overflow: hidden; }
+.split div { height: 100%; }
+.split div + div { border-left: 2px solid var(--soft); }
+.legend { list-style: none; display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; margin-top: .75rem; font-size: .84rem; color: var(--ink-2); }
+.legend li { display: flex; align-items: center; gap: .4rem; }
+.legend i { width: .65rem; height: .65rem; border-radius: 2px; flex: none; }
+.s1 { background: var(--accent); } .s2 { background: var(--ink); } .s3 { background: var(--ink-2); } .s4 { background: var(--ink-3); } .s5 { background: var(--line); }
+
+.script { list-style: none; }
+.script li { display: grid; grid-template-columns: 4.8rem minmax(0, 1fr); gap: .8rem; padding: .55rem 0; border-bottom: 1px solid var(--line); font-size: .92rem; color: var(--ink-2); }
+.script li:last-child { border-bottom: none; }
+.script li b { font-weight: 700; color: var(--ink); font-size: .88rem; }
+
+/* VIAXI */
+.founder { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+@media (max-width: 860px) { .founder { grid-template-columns: 1fr; } }
+.btn { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1.5rem; padding: .75rem 1.2rem; background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; font-size: .95rem; border-radius: 6px; }
+.btn:hover { filter: brightness(1.1); }
+:root[data-theme="dark"] .btn { color: #0f1114; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #0f1114; } }
+.docs { list-style: none; background: var(--soft); border-radius: 10px; padding: .4rem 1.3rem; }
+.docs li { display: flex; justify-content: space-between; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--line); font-size: .95rem; font-weight: 500; }
+.docs li:last-child { border-bottom: none; }
+.docs li span:last-child { font-size: .82rem; color: var(--ink-3); white-space: nowrap; }
+
+/* TABLAS */
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+th { text-align: left; font-weight: 600; font-size: .82rem; color: var(--ink-3); padding: 0 1rem .7rem 0; border-bottom: 1px solid var(--ink-3); }
+td { padding: 1rem 1rem 1rem 0; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); }
+td:first-child { color: var(--ink); font-weight: 700; white-space: nowrap; }
+td.meta { font-size: .84rem; color: var(--ink-3); white-space: nowrap; font-weight: 500; }
+td.period { font-size: .88rem; color: var(--ink-3); font-weight: 600; }
+.pill { display: inline-block; margin-left: .5rem; font-size: .72rem; font-weight: 700; color: var(--accent); background: var(--accent-tint); padding: .1rem .5rem; border-radius: 999px; vertical-align: middle; }
+@media (max-width: 640px) {
+  table.stackable thead { display: none; }
+  table.stackable tr { display: block; padding: .9rem 0; border-bottom: 1px solid var(--line); }
+  table.stackable td { display: block; padding: .1rem 0; border: none; white-space: normal; }
 }
 
-.hero h1 .accent { color: var(--accent); }
+/* MARCAS */
+.brands { display: flex; flex-wrap: wrap; gap: .6rem 2rem; font-size: clamp(1.1rem, 2.4vw, 1.4rem); font-weight: 700; letter-spacing: -0.02em; color: var(--ink-3); }
+.brands .on { color: var(--ink); }
+.brands-note { margin-top: 1.6rem; font-size: .9rem; color: var(--ink-3); }
 
-.hero-lede {
-  font-size: 1.15rem;
-  line-height: 1.6;
-  color: var(--ink-soft);
-  max-width: 640px;
-  margin-bottom: 3rem;
-}
+/* ENTREGABLES */
+.deliver { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+@media (max-width: 860px) { .deliver { grid-template-columns: 1fr; } }
+.dl dt { font-weight: 700; margin-top: 1.4rem; }
+.dl dt:first-child { margin-top: 0; }
+.dl dd { color: var(--ink-2); font-size: .95rem; margin-top: .2rem; }
+.slide { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 30px -18px rgba(18, 20, 23, .35); aspect-ratio: 16 / 10; max-width: 100%; padding: 1.3rem 1.4rem; display: flex; flex-direction: column; gap: .9rem; }
+.slide-top { display: flex; justify-content: space-between; gap: .5rem; font-size: .76rem; color: var(--ink-3); font-weight: 600; }
+.slide h5 { font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; line-height: 1.2; }
+.slide-k { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
+.slide-k div { border-top: 2px solid var(--accent); padding-top: .4rem; }
+.slide-k b { display: block; font-weight: 800; font-size: 1.25rem; color: var(--accent); }
+.slide-k span { font-size: .74rem; color: var(--ink-3); }
+.slide p { font-size: .82rem; line-height: 1.45; max-width: none; }
+.slide p b { color: var(--ink); }
+@media (max-width: 480px) { .slide { aspect-ratio: auto; } }
 
-.hero-stats {
-  display: flex;
-  gap: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--rule);
-  flex-wrap: wrap;
-}
+/* DOCENCIA / HERRAMIENTAS */
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+.since { font-size: clamp(2.6rem, 7vw, 4rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: var(--accent); }
+.tools { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); }
+.tools dt, .tools dd { padding: .7rem 0; border-bottom: 1px solid var(--line); }
+.tools dt { font-size: .86rem; color: var(--ink-3); font-weight: 600; }
+.tools dd { font-size: .95rem; }
+@media (max-width: 420px) { .tools { grid-template-columns: 1fr; } .tools dt { border-bottom: none; padding-bottom: 0; } }
 
-.stat-num {
-  font-family: 'Fraunces', serif;
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: var(--accent);
-  line-height: 1;
-  margin-bottom: 0.4rem;
-}
-
-.stat-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
-
-/* SECTION */
-section {
-  padding: 4rem 0;
-  border-top: 1px solid var(--rule);
-}
-
-section h2 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.6rem;
-  font-weight: 500;
-  margin-bottom: 2rem;
-  letter-spacing: -0.01em;
-}
-
-section p {
-  margin-bottom: 1rem;
-  color: var(--ink-soft);
-  max-width: 680px;
-}
-
-section p:last-child { margin-bottom: 0; }
-
-strong { color: var(--ink); font-weight: 600; }
-
-/* ABOUT */
-.about-list {
-  list-style: none;
-  margin-top: 2rem;
-  columns: 2;
-  column-gap: 2rem;
-}
-
-.about-list li {
-  padding: 0.5rem 0;
-  color: var(--ink-soft);
-  break-inside: avoid;
-  border-bottom: 1px solid var(--rule);
-}
-
-@media (max-width: 720px) {
-  .about-list { columns: 1; }
-}
-
-/* CLIENTS */
-.clients-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 1.5rem 0 2rem;
-}
-
-.client-tag {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--ink);
-  border-radius: 999px;
-  font-size: 0.95rem;
-  background: var(--paper);
-}
-
-.budget-note {
-  padding: 1.5rem;
-  background: var(--paper);
-  border-left: 3px solid var(--accent);
-  border-radius: 4px;
-}
-
-.budget-note strong { display: block; margin-bottom: 0.3rem; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
-
-.budget-note-val {
-  font-family: 'Fraunces', serif;
-  font-size: 1.2rem;
-  color: var(--ink);
-}
-
-/* PROJECTS */
-.project {
-  padding: 2rem 0;
-  border-top: 1px solid var(--rule);
-}
-
-.project:first-of-type { border-top: none; padding-top: 0.5rem; }
-
-.project-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.project h3 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.35rem;
-  font-weight: 500;
-}
-
-.project-cat {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
-
-.project-metric {
-  display: inline-block;
-  padding: 0.6rem 1rem;
-  background: var(--paper);
-  border-left: 3px solid var(--accent);
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
-}
-
-.project-metric strong {
-  color: var(--accent);
-  font-family: 'Fraunces', serif;
-  font-weight: 500;
-  font-size: 1.05rem;
-}
-
-.project p {
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
-}
-
-.project-meta {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin-top: 0.5rem;
-}
-
-/* TEACHING */
-.teaching-body {
-  display: flex;
-  gap: 2.5rem;
-  align-items: baseline;
-  flex-wrap: wrap;
-}
-
-.teaching-num {
-  font-family: 'Fraunces', serif;
-  font-size: 4rem;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--accent);
-}
-
-.teaching-text {
-  flex: 1;
-  min-width: 280px;
-}
-
-.teaching-text p:first-child {
-  color: var(--ink);
-  font-family: 'Fraunces', serif;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-/* STACK */
-.stack-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  border: 1px solid var(--ink);
-  background: var(--paper);
-  margin-top: 1rem;
-}
-
-.stack-col {
-  padding: 1.5rem 1.4rem;
-  border-right: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-}
-.stack-col:nth-child(3n) { border-right: none; }
-.stack-col:nth-last-child(-n+3) { border-bottom: none; }
-
-.stack-col h3 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--rule);
-}
-
-.stack-col ul { list-style: none; }
-.stack-col li {
-  padding: 0.35rem 0;
-  color: var(--ink-soft);
-  font-size: 0.95rem;
-}
-
-@media (max-width: 720px) {
-  .stack-grid { grid-template-columns: 1fr; }
-  .stack-col { border-right: none !important; border-bottom: 1px solid var(--ink) !important; }
-  .stack-col:last-child { border-bottom: none !important; }
-}
-
-/* CONTACT */
-.contact-list {
-  list-style: none;
-  margin-top: 1.5rem;
-}
-
-.contact-list li {
-  padding: 0.6rem 0;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  gap: 1rem;
-  align-items: baseline;
-}
-
-.contact-list li:last-child { border-bottom: none; }
-
-.contact-list strong {
-  min-width: 100px;
-  color: var(--ink-mute);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-/* FOOTER */
-footer {
-  padding: 2rem 2.5rem;
-  text-align: center;
-  color: var(--ink-mute);
-  border-top: 1px solid var(--rule);
-  margin-top: 3rem;
-  font-size: 0.9rem;
-}
+/* CONTACTO */
+.contact { margin-top: 5rem; padding-block: 3.5rem; border-top: 1px solid var(--line); }
+.contact h2 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.05; }
+.contact p { margin-top: .6rem; }
+.contact-rows { margin-top: 1.8rem; display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; align-items: center; }
+.email { font-size: 1.15rem; font-weight: 700; user-select: all; word-break: break-all; }
+.copy { font: inherit; font-size: .85rem; font-weight: 600; padding: .45rem .9rem; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; cursor: pointer; margin-left: .7rem; }
+.copy:hover { border-color: var(--accent); color: var(--accent); }
+.contact a { color: var(--accent); font-weight: 700; text-underline-offset: 3px; }
+footer { border-top: 1px solid var(--line); padding-block: 1.5rem; font-size: .85rem; color: var(--ink-3); }
 </style>
 </head>
 <body>
-
-<nav class="nav">
-  <div class="nav-logo">Diego Valdivia<span>.</span></div>
-  <div class="nav-links">
-    <a href="#about">Sobre mí</a>
-    <a href="#clients">Clientes</a>
-    <a href="#projects">Proyectos</a>
-    <a href="#teaching">Docencia</a>
-    <a href="#contact">Contacto</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="bar-name" href="#top">Diego Valdivia</a>
+    <nav>
+      <a href="#casos">Casos</a>
+      <a href="#viaxi">Viaxi</a>
+      <a href="#trabajo">Más trabajo</a>
+      <a href="#trayectoria">Trayectoria</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <span class="status"><i></i>Tomando proyectos</span>
   </div>
-</nav>
+</header>
 
-<div class="wrap">
+<main class="wrap" id="top">
 
-<!-- HERO -->
-<section class="hero" style="border-top: none;">
-  <div class="hero-eyebrow mono">Marketing Manager · Ciudad de México</div>
-  <h1>Ayudo a marcas a <span class="accent">vender más</span> en línea.</h1>
-  <p class="hero-lede">
-    Trabajo campañas en Meta, Google, Amazon y Mercado Libre, optimizo tiendas Shopify y monto el tracking necesario para tomar decisiones con datos reales.
-  </p>
+<section class="hero">
+  <div class="eyebrow">Marketing Director · Consultor independiente</div>
+  <h1>Diego Valdivia</h1>
+  <div class="hero-sub">
+    <p class="lede">Dirijo marketing de performance para marcas que venden en línea en México, Europa y Estados Unidos. Medios pagados, Amazon y Mercado Libre, Shopify y el tracking que hace falta para medir todo eso bien.</p>
+    <p class="role">Antes en Publicis (L'Oréal), Corebiz, Quinio y Levely. Profesor en la Escuela Bancaria y Comercial.</p>
+  </div>
+  <dl class="spec">
+    <div><dt>Presupuesto mensual (peak)</dt><dd>$16M MXN</dd></div>
+    <div><dt>Marcas atendidas</dt><dd>+25</dd></div>
+    <div><dt>Mercados activos</dt><dd>MX · EU · USA</dd></div>
+    <div><dt>Docente en EBC</dt><dd>Desde 2018</dd></div>
+  </dl>
+</section>
 
-  <div class="hero-stats">
+<!-- CASOS -->
+<section class="sec" id="casos">
+  <div class="sec-title"><h2>Casos</h2><span>Cifras en variaciones y ratios, 2026</span></div>
+
+  <article class="case">
+    <div class="case-top"><h3>PlayCity</h3><span class="case-tags">Casino y Sportsbook · Meta, Google, TikTok · GA4 server-side</span></div>
+    <p class="case-lead">Entré a ordenar la medición y terminé llevando todo el performance. Con la señal de registro y depósito completa, las plataformas empezaron a optimizar hacia el usuario que sí deposita.</p>
+    <div class="deltas">
+      <div class="delta"><b>+26%</b><span>primeros depósitos en septiembre vs agosto, con la misma inversión</span></div>
+      <div class="delta"><b>−36%</b><span>costo por depósito entre julio y septiembre</span></div>
+      <div class="delta"><b>−25%</b><span>costo por registro en Meta en un mes</span></div>
+      <div class="delta"><b>~+20%</b><span>ticket promedio después de recuperar la señal</span></div>
+    </div>
+    <div class="case-body">
+      <div class="col">
+        <h4>Qué hice</h4>
+        <ul>
+          <li>Tracking híbrido web y server-side: GA4, GTM Server, Meta CAPI y TikTok Events.</li>
+          <li>Copies por etapa de funnel y por tipo de usuario: nuevo, registrado sin depósito y jugador de casino.</li>
+          <li>Estudio de demanda de "giros gratis" en Google: volumen, competencia, CPC y riesgos de marca.</li>
+          <li>Reporte mensual con lectura por canal y acciones para el mes siguiente.</li>
+        </ul>
+        <h4>Qué aprendimos</h4>
+        <p>Meta llena el funnel pero el depósito cierra por Direct. Si se mide solo con GA4 a último clic, Meta parece estar cayendo cuando en realidad trae a la gente que deposita después.</p>
+      </div>
+      <div>
+        <figure class="chart">
+          <div class="chart-head"><b>Usuarios nuevos que se registran</b><span>Jun a sep 2026</span></div>
+          <svg viewBox="0 0 560 220" role="img" aria-label="Conversión de usuario nuevo a registro: junio 10.8%, julio 16.2%, agosto 17.8%, septiembre 18.5%">
+            <line class="g-grid" x1="50" y1="180" x2="540" y2="180"/>
+            <line class="g-grid" x1="50" y1="142.5" x2="540" y2="142.5"/>
+            <line class="g-grid" x1="50" y1="105" x2="540" y2="105"/>
+            <line class="g-grid" x1="50" y1="67.5" x2="540" y2="67.5"/>
+            <line class="g-grid" x1="50" y1="30" x2="540" y2="30"/>
+            <text class="g-axis" x="40" y="184" text-anchor="end">0%</text>
+            <text class="g-axis" x="40" y="146.5" text-anchor="end">5%</text>
+            <text class="g-axis" x="40" y="109" text-anchor="end">10%</text>
+            <text class="g-axis" x="40" y="71.5" text-anchor="end">15%</text>
+            <text class="g-axis" x="40" y="34" text-anchor="end">20%</text>
+            <polygon class="g-area" points="90,99 230,58.5 370,46.5 510,41.25 510,180 90,180"/>
+            <polyline class="g-line" points="90,99 230,58.5 370,46.5 510,41.25"/>
+            <circle class="g-dot" cx="90" cy="99" r="4"/>
+            <circle class="g-dot" cx="230" cy="58.5" r="4"/>
+            <circle class="g-dot" cx="370" cy="46.5" r="4"/>
+            <circle class="g-dot" cx="510" cy="41.25" r="6"/>
+            <text class="g-val" x="90" y="86" text-anchor="middle">10.8%</text>
+            <text class="g-val" x="230" y="45.5" text-anchor="middle">16.2%</text>
+            <text class="g-val" x="370" y="33.5" text-anchor="middle">17.8%</text>
+            <text class="g-val" x="510" y="24" text-anchor="middle">18.5%</text>
+            <text class="g-axis" x="90" y="204" text-anchor="middle">Jun</text>
+            <text class="g-axis" x="230" y="204" text-anchor="middle">Jul</text>
+            <text class="g-axis" x="370" y="204" text-anchor="middle">Ago</text>
+            <text class="g-axis" x="510" y="204" text-anchor="middle">Sep</text>
+          </svg>
+          <figcaption>De cada 100 usuarios nuevos se registraban 11 en junio. En septiembre, 18.5. Fuente: GA4.</figcaption>
+        </figure>
+        <figure class="chart">
+          <div class="chart-head"><b>Por dónde cierran los depósitos</b><span>% de FTD, sep 2026</span></div>
+          <div class="split" role="img" aria-label="Direct 61.5%, Paid Social 18.6%, Orgánico 10.6%, Paid Search 8.1%, Otros 1.2%">
+            <div class="s1" style="width:61.5%"></div><div class="s2" style="width:18.6%"></div><div class="s3" style="width:10.6%"></div><div class="s4" style="width:8.1%"></div><div class="s5" style="width:1.2%"></div>
+          </div>
+          <ul class="legend">
+            <li><i class="s1"></i>Direct 61.5%</li><li><i class="s2"></i>Paid Social 18.6%</li><li><i class="s3"></i>Orgánico 10.6%</li><li><i class="s4"></i>Paid Search 8.1%</li><li><i class="s5"></i>Otros 1.2%</li>
+          </ul>
+          <figcaption>Meta trae el 59% de los registros del mes, pero el depósito aterriza en Direct.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="case-top"><h3>Monkey Hands</h3><span class="case-tags">Grip deportivo · Shopify EU, USA y MX · Amazon · Mercado Libre · Klaviyo</span></div>
+    <p class="case-lead">Tres tiendas, tres monedas y tres negocios distintos: en Europa manda el mayoreo, en Estados Unidos el retail y en México los dos, más Mercado Libre. Llevo el marketing de las tres con un reporte mensual por mercado.</p>
+    <div class="deltas">
+      <div class="delta"><b>4.3x</b><span>ROAS en Mercado Libre Ads, el mejor retorno del portafolio</span></div>
+      <div class="delta"><b>+17.9%</b><span>México en julio, un mes que los dos años anteriores cayó entre 11% y 17%</span></div>
+      <div class="delta"><b>−44%</b><span>CAC de cliente nuevo en México, con 29% menos inversión en Meta</span></div>
+      <div class="delta"><b>5.5 → 6.7</b><span>MER B2C en Estados Unidos de junio a julio</span></div>
+    </div>
+    <div class="case-body">
+      <div class="col">
+        <h4>Qué hice</h4>
+        <ul>
+          <li>Programa de UGC con atletas de Hyrox, pádel, calistenia y pole, con flujo de guiones automatizado.</li>
+          <li>Diagnóstico por SKU en Amazon Italia y Alemania: roturas de inventario con anuncios encendidos y productos que gastaban más de lo que vendían.</li>
+          <li>PDPs con bundles y add-ons, empezando por Europa.</li>
+          <li>Retención de cuentas B2B en Europa, que recompran cada 94 días en promedio.</li>
+        </ul>
+        <h4>Un guion UGC por dentro</h4>
+        <ol class="script">
+          <li><b>Hooks</b><span>Tres aperturas grabadas por separado. Se queda la que retiene más.</span></li>
+          <li><b>Antes</b><span>Qué usaba (vendas, magnesio) y en qué momento le fallaba.</span></li>
+          <li><b>Cambio</b><span>La razón técnica, contada como coach o competidor.</span></li>
+          <li><b>Prueba</b><span>Demo en barra o aparato, sin cortes.</span></li>
+          <li><b>Cierre</b><span>CTA según mercado: tienda, Amazon o Mercado Libre.</span></li>
+        </ol>
+      </div>
+      <div>
+        <figure class="chart">
+          <div class="chart-head"><b>Tasa de conversión por tienda</b><span>Jul 2026</span></div>
+          <svg viewBox="0 0 560 175" role="img" aria-label="Conversión: USA 8.19%, Europa 1.79%, México 1.46%, objetivo 4%">
+            <line class="g-grid" x1="110" y1="15" x2="110" y2="150"/>
+            <line class="g-grid" x1="210" y1="15" x2="210" y2="150"/>
+            <line class="g-grid" x1="310" y1="15" x2="310" y2="150"/>
+            <line class="g-grid" x1="410" y1="15" x2="410" y2="150"/>
+            <line class="g-grid" x1="510" y1="15" x2="510" y2="150"/>
+            <text class="g-lbl" x="100" y="42" text-anchor="end">USA</text>
+            <text class="g-lbl" x="100" y="87" text-anchor="end">Europa</text>
+            <text class="g-lbl" x="100" y="132" text-anchor="end">México</text>
+            <rect class="g-bar hi" x="110" y="24" width="327.6" height="26" rx="3"/>
+            <rect class="g-bar" x="110" y="69" width="71.6" height="26" rx="3"/>
+            <rect class="g-bar" x="110" y="114" width="58.4" height="26" rx="3"/>
+            <text class="g-val" x="445" y="42">8.19%</text>
+            <text class="g-val" x="189" y="87">1.79%</text>
+            <text class="g-val" x="176" y="132">1.46%</text>
+            <line class="g-target" x1="270" y1="12" x2="270" y2="152"/>
+            <text class="g-target-lbl" x="276" y="104">objetivo 4%</text>
+            <text class="g-axis" x="110" y="168" text-anchor="middle">0%</text>
+            <text class="g-axis" x="210" y="168" text-anchor="middle">2.5%</text>
+            <text class="g-axis" x="310" y="168" text-anchor="middle">5%</text>
+            <text class="g-axis" x="410" y="168" text-anchor="middle">7.5%</text>
+            <text class="g-axis" x="510" y="168" text-anchor="middle">10%</text>
+          </svg>
+          <figcaption>Estados Unidos convierte cuatro veces más que Europa y México, y es el único mercado donde el costo de adquirir un cliente se recupera en la primera compra. Por eso el trabajo de CRO arranca en Europa y México.</figcaption>
+        </figure>
+        <p class="stackline">Shopify Plus · Klaviyo · Amazon Ads · Mercado Libre Ads · Meta Ads</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="case-top"><h3>Ilhũ Care</h3><span class="case-tags">Skin, hair, sun y lip care · Relanzamiento premium · Shopify MX</span></div>
+    <p class="case-lead">Estamos relanzando la marca en México con un precio premium. Trabajé la identidad, la tienda, el SEO de colecciones y el storytelling de ingredientes, para que el precio se sostenga por el producto y no por el descuento.</p>
+  </article>
+</section>
+
+<!-- VIAXI -->
+<section class="sec" id="viaxi">
+  <div class="sec-title"><h2>Proyecto propio</h2><span>Founder</span></div>
+  <div class="founder">
     <div>
-      <div class="stat-num">$16M MXN</div>
-      <div class="stat-label">Presupuesto mensual (peak)</div>
+      <div class="case-top"><h3>Viaxi</h3><span class="case-tags">Carpooling · CDMX</span></div>
+      <p class="case-lead">Una app para compartir el trayecto diario al trabajo solo con gente de tu red: contactos directos o conocidos de tus conocidos. Quien maneja publica su ruta fija y quien viaja se suma. La app no cobra ni procesa pagos.</p>
+      <p style="margin-top:1rem">Hice el concepto, el naming, la marca, el producto, el modelo de negocio y el contenido de lanzamiento.</p>
+      <a class="btn" href="https://viaxi.app" target="_blank" rel="noopener">Ver viaxi.app ↗</a>
     </div>
+    <ul class="docs">
+      <li><span>Brand book y guía de tono</span><span>Marca</span></li>
+      <li><span>PRD del MVP y círculos de confianza</span><span>Producto</span></li>
+      <li><span>Pitch deck para ronda seed</span><span>Negocio</span></li>
+      <li><span>Marco legal y matriz de riesgos</span><span>Legal</span></li>
+      <li><span>Espacios publicitarios y lealtad</span><span>Monetización</span></li>
+      <li><span>Calendario editorial de Instagram</span><span>Contenido</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- MAS TRABAJO -->
+<section class="sec" id="trabajo">
+  <div class="sec-title"><h2>Más trabajo</h2><span>Directo, en agencia o en consultoría</span></div>
+  <div class="tbl-wrap">
+    <table class="stackable">
+      <thead><tr><th>Marca</th><th>Qué hice</th><th>Canal</th></tr></thead>
+      <tbody>
+        <tr><td>Ópticas Devlyn</td><td>Performance en Meta, Google y TikTok desde Levely, y producción de videos UGC para sus campañas.</td><td class="meta">Meta · Google · UGC</td></tr>
+        <tr><td>L'Oréal México</td><td>Amazon Search y DSP para la división LDB en Hot Sale 2024 y reporting de Amazon para todas las divisiones. Vía Publicis.</td><td class="meta">Amazon · DSP</td></tr>
+        <tr><td>Miniso, Sally Beauty, Diunsa</td><td>Consultoría de performance y CRO desde Corebiz.</td><td class="meta">VTEX · CRO</td></tr>
+        <tr><td>Aldo Conti, Shasa, Chilli Beans</td><td>Campañas digitales y propuesta de medios anual, en México, Colombia, Perú y Australia.</td><td class="meta">Meta · Google</td></tr>
+        <tr><td>Librerías Gandhi</td><td>Campañas y planeación de presupuesto por objetivo desde Levely.</td><td class="meta">Meta · Google · TikTok</td></tr>
+        <tr><td>Luna Segura<span class="pill">Activo</span></td><td>Secciones Liquid a la medida: guía de tallas con pestañas, quiz, hero y grid de colecciones. Creativos para el kit "Mi Primera Menstruación".</td><td class="meta">Shopify · Liquid</td></tr>
+        <tr><td>Honesta<span class="pill">Activo</span></td><td>Mejoras a la plataforma de reclutamiento: flujo nuevo en el formulario, precios, preguntas frecuentes y legales.</td><td class="meta">Bubble</td></tr>
+        <tr><td>Joyas Citlali<span class="pill">Activo</span></td><td>Desarrollo y soporte de la tienda. Encontré el conflicto entre apps que bloqueaba los clics en móvil.</td><td class="meta">Shopify</td></tr>
+        <tr><td>BPN Pro y ZamnaMed</td><td>Campañas y bundles para suplementos de sueño, enfoque y adaptógenos.</td><td class="meta">Meta · Shopify</td></tr>
+        <tr><td>Loft</td><td>Leads para venta de inmuebles y crédito hipotecario, con forecast de alcance y propuesta SEO.</td><td class="meta">Meta · Google · SEO</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ENTREGABLES -->
+<section class="sec" id="entregables">
+  <div class="sec-title"><h2>Lo que recibe un cliente</h2></div>
+  <div class="deliver">
+    <dl class="dl">
+      <dt>Un reporte que se lee en cinco minutos</dt>
+      <dd>Cada canal contra el mes anterior, hallazgos numerados y una acción por cada uno.</dd>
+      <dt>Tracking que se puede auditar</dt>
+      <dd>GA4, GTM web y server, CAPI y Events API. Cuando el panel y la tienda no cuadran, encuentro dónde se rompe.</dd>
+      <dt>Estudios antes de invertir</dt>
+      <dd>Volumen de búsqueda, CPC estimado, qué hace la competencia y qué riesgo tiene entrar.</dd>
+      <dt>Creativo con datos</dt>
+      <dd>Copies por etapa del funnel, guiones UGC por deporte y qué anuncios pagan y cuáles hay que apagar.</dd>
+    </dl>
+    <figure>
+      <div class="slide" role="img" aria-label="Ejemplo de lámina de resumen ejecutivo mensual">
+        <div class="slide-top"><span>Resumen ejecutivo · Performance</span><span>Septiembre</span></div>
+        <h5>Tercer mes seguido de crecimiento en depósitos</h5>
+        <div class="slide-k">
+          <div><b>+6.5%</b><span>sesiones</span></div>
+          <div><b>+10.3%</b><span>registros</span></div>
+          <div><b>+25.6%</b><span>depósitos</span></div>
+        </div>
+        <p><b>1. Social siembra, no cierra.</b> Meta trae 59% de los registros y 19% de los depósitos.</p>
+        <p><b>2. Direct cierra el negocio.</b> 53% de las sesiones y 61% de los depósitos.</p>
+      </div>
+      <figcaption>Primera lámina de un reporte real (PlayCity, septiembre 2026), con las cifras en variación.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- TRAYECTORIA -->
+<section class="sec" id="trayectoria">
+  <div class="sec-title"><h2>Trayectoria</h2><span>2018 a hoy</span></div>
+  <div class="tbl-wrap">
+    <table class="stackable">
+      <thead><tr><th>Periodo</th><th>Rol</th><th>Dónde</th></tr></thead>
+      <tbody>
+        <tr><td class="period">2024 a hoy</td><td>Marketing Director y consultor independiente</td><td>Monkey Hands, PlayCity, Ilhũ y otras</td></tr>
+        <tr><td class="period">2024</td><td>Performance Manager</td><td>Levely</td></tr>
+        <tr><td class="period">Feb a ago 2024</td><td>Performance Marketing Manager</td><td>Publicis Groupe · L'Oréal México</td></tr>
+        <tr><td class="period">Oct 2023 a feb 2024</td><td>Performance Marketing Manager</td><td>Loft</td></tr>
+        <tr><td class="period">Nov 2022 a oct 2023</td><td>Performance Analyst Senior</td><td>Quinio</td></tr>
+        <tr><td class="period">Feb 2021 a oct 2022</td><td>Digital Analyst y CRO</td><td>Corebiz</td></tr>
+        <tr><td class="period">Feb 2020 a ene 2021</td><td>Digital Specialist</td><td>MSD Salud Animal</td></tr>
+        <tr><td class="period">Oct 2018 a ene 2020</td><td>Digital Marketing Executive</td><td>RFP Group · 6 cadenas de farmacias</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- MARCAS -->
+<section class="sec" id="marcas">
+  <div class="sec-title"><h2>Marcas</h2><span>En negro, activas en 2026</span></div>
+  <div class="brands">
+    <span class="on">Monkey Hands</span><span class="on">PlayCity</span><span class="on">Ilhũ Care</span><span class="on">Luna Segura</span><span class="on">Honesta</span><span class="on">Joyas Citlali</span>
+    <span>L'Oréal</span><span>Ópticas Devlyn</span><span>Miniso</span><span>Librerías Gandhi</span><span>Aldo Conti</span><span>Shasa</span><span>Chilli Beans</span><span>Sally Beauty</span><span>Vox Muebles</span><span>Diunsa</span><span>Tiendas 3B</span><span>Farmatodo</span><span>MSD</span><span>Loft</span><span>BPN Pro</span><span>ZamnaMed</span><span>Green EcoBeauty Puff</span><span>Ni Una Dieta Más</span><span>Dekos</span><span>Guardameta</span><span>Cardela</span><span>SportMasters</span><span>Safety Store</span>
+  </div>
+  <p class="brands-note">Presupuestos gestionados de 30 mil a 16 millones de pesos al mes en medios pagados.</p>
+</section>
+
+<!-- DOCENCIA + HERRAMIENTAS -->
+<section class="sec" id="docencia">
+  <div class="sec-title"><h2>Docencia y herramientas</h2></div>
+  <div class="two">
     <div>
-      <div class="stat-num">9 años</div>
-      <div class="stat-label">Docente en EBC</div>
+      <div class="since">Desde 2018</div>
+      <p style="margin-top:1rem;color:var(--ink);font-weight:600">Profesor en la Escuela Bancaria y Comercial.</p>
+      <p style="margin-top:.6rem">Doy Marketing Digital, Campañas Digitales, Plan de Marketing, Pricing y Gestión de Redes Sociales, con módulos prácticos de Meta Ads y Google Ads. Lo que pasa en los proyectos llega al aula, y explicarlo en clase me obliga a entenderlo mejor.</p>
+      <dl class="tools" style="margin-top:2rem">
+        <dt>Maestría</dt><dd>Educación Basada en Competencias, UVM</dd>
+        <dt>Licenciatura</dt><dd>Ciencias de la Comunicación, UNITEC</dd>
+        <dt>Diplomados</dt><dd>Marketing Digital (ADM) y Administración de Marketing (UNITEC)</dd>
+        <dt>Certificaciones</dt><dd>Google Ads Search, Google Analytics, Amazon DSP</dd>
+      </dl>
     </div>
-    <div>
-      <div class="stat-num">MX · EU · USA</div>
-      <div class="stat-label">Mercados activos</div>
-    </div>
+    <dl class="tools">
+      <dt>Performance</dt><dd>Meta Ads, Google Ads, TikTok Ads, YouTube Ads, DV360</dd>
+      <dt>Marketplaces</dt><dd>Amazon Ads y DSP, Seller Central, Mercado Libre Ads y Seller</dd>
+      <dt>Medición</dt><dd>GA4, GTM web y server, Meta CAPI, TikTok Events API</dd>
+      <dt>eCommerce</dt><dd>Shopify y Shopify Plus, VTEX, Magento, WooCommerce, Tiendanube, Bubble</dd>
+      <dt>Email y CRM</dt><dd>Klaviyo, Mailchimp, HubSpot, Odoo</dd>
+      <dt>AI y trabajo</dt><dd>Claude, ChatGPT, Gemini, HeyGen, Notion, Loom</dd>
+      <dt>Idiomas</dt><dd>Español e inglés</dd>
+    </dl>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <h2>Sobre mí</h2>
-  <p>
-    Soy Marketing Manager. He manejado presupuestos desde 30 mil hasta 16 millones de pesos al mes en Meta, Google, TikTok, Amazon y Mercado Libre. En paralelo monto el tracking (GA4, GTM, server-side) para que la inversión se pueda medir de verdad.
-  </p>
-  <p>
-    También trabajo Shopify a fondo: PDPs, bundles y toda la parte de conversión. Delego lo que es puramente ejecución y me quedo con estrategia, email marketing y todo lo que mueve la aguja.
-  </p>
-
-  <ul class="about-list">
-    <li>Campañas Meta, Google y TikTok</li>
-    <li>Shopify y Shopify Plus</li>
-    <li>CRO y optimización de tienda</li>
-    <li>GA4 y tracking server-side</li>
-    <li>Amazon y Mercado Libre</li>
-    <li>Email marketing (Klaviyo)</li>
-    <li>Estrategia de producto</li>
-  </ul>
-</section>
-
-<!-- CLIENTS -->
-<section id="clients">
-  <h2>Clientes</h2>
-  <p>Marcas con las que he trabajado:</p>
-
-  <div class="clients-list">
-    <span class="client-tag">Miniso</span>
-    <span class="client-tag">L'Oréal</span>
-    <span class="client-tag">Aldo Conti</span>
-    <span class="client-tag">Shasa</span>
-    <span class="client-tag">Farmatodo</span>
-    <span class="client-tag">Tiendas 3B</span>
-  </div>
-
-  <div class="budget-note">
-    <strong>Presupuestos gestionados</strong>
-    <div class="budget-note-val">De 30 mil a 16 millones de pesos mensuales en medios pagados.</div>
+<!-- CONTACTO -->
+<section class="contact" id="contacto">
+  <h2>¿Trabajamos juntos?</h2>
+  <p>Disponible para consultoría, dirección de marketing y proyectos puntuales.</p>
+  <div class="contact-rows">
+    <span><span class="email" id="email">diegovaldivia26@gmail.com</span><button class="copy" id="copy" type="button">Copiar</button></span>
+    <a href="https://www.linkedin.com/in/soydiegovaldivia/" target="_blank" rel="noopener">LinkedIn ↗</a>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <h2>Proyectos</h2>
+</main>
 
-  <div class="project">
-    <div class="project-head">
-      <h3>Monkey Hands</h3>
-      <span class="project-cat">Grip para calistenia y climbing</span>
-    </div>
-    <div class="project-metric"><strong>ROAS 4x – 7x</strong> sostenido en Mercado Libre MX</div>
-    <p>
-      Marca de grip para deportes funcionales. Trabajo la tienda Shopify Plus, campañas en Meta, Amazon y Mercado Libre, y toda la retención B2B en Europa (los clientes recompran cada 94 días en promedio).
-    </p>
-    <div class="project-meta">Mercados: MX, EU, USA · Stack: Shopify Plus, Klaviyo, MeLi</div>
-  </div>
+<footer><div class="wrap">Diego Valdivia · 2026</div></footer>
 
-  <div class="project">
-    <div class="project-head">
-      <h3>Ilhũ Care</h3>
-      <span class="project-cat">Cuidado personal orgánico</span>
-    </div>
-    <p>
-      Marca premium de skin, hair y sun care. Trabajé la identidad, la tienda Shopify, el SEO de colecciones y el storytelling de ingredientes.
-    </p>
-    <div class="project-meta">Categorías: Hair, Skin, Sun, Lip</div>
-  </div>
-
-  <div class="project">
-    <div class="project-head">
-      <h3>PlayCity</h3>
-      <span class="project-cat">Casino online · Tracking y ads</span>
-    </div>
-    <div class="project-metric"><strong>+20%</strong> en ticket promedio, mejora en FTD y CAC</div>
-    <p>
-      Monté el tracking híbrido web y server-side (GA4, GTM, Meta CAPI, TikTok Events). Al recuperar señal, las campañas optimizaron mejor: subió el ticket promedio ~20%, bajó el CAC y mejoraron los primeros depósitos.
-    </p>
-    <div class="project-meta">Stack: GA4, GTM Server, CAPI · KPIs: FTD, CAC, AOV</div>
-  </div>
-
-  <div class="project">
-    <div class="project-head">
-      <h3>BPN Pro</h3>
-      <span class="project-cat">Suplementación</span>
-    </div>
-    <p>
-      Campañas Meta y bundles para una línea de suplementos de sleep, focus y adaptógenos. Enfoque en ángulos creativos y combinaciones de producto.
-    </p>
-    <div class="project-meta">Canal: Meta Ads</div>
-  </div>
-
-  <div class="project">
-    <div class="project-head">
-      <h3>Viax</h3>
-      <span class="project-cat">Movilidad · Carpooling (founder)</span>
-    </div>
-    <p>
-      Proyecto propio de carpooling urbano en CDMX basado en la red de contactos: no matcheas con desconocidos, sino con gente cercana o con conexiones en común. Trabajé naming, marca, producto y modelo de negocio.
-    </p>
-    <div class="project-meta">Mercado: CDMX · Etapa: Pre-MVP</div>
-  </div>
-</section>
-
-<!-- TEACHING -->
-<section id="teaching">
-  <h2>Docencia</h2>
-  <div class="teaching-body">
-    <div class="teaching-num">9 años</div>
-    <div class="teaching-text">
-      <p>Profesor en la Escuela Bancaria Comercial (EBC).</p>
-      <p>Nueve años dando clase de marketing digital y eCommerce. Lo que aprendo en los proyectos lo llevo al aula, y lo que discutimos en clase me obliga a explicar mejor lo que hago.</p>
-    </div>
-  </div>
-</section>
-
-<!-- STACK -->
-<section id="stack">
-  <h2>Herramientas</h2>
-
-  <div class="stack-grid">
-    <div class="stack-col">
-      <h3>Performance</h3>
-      <ul>
-        <li>Meta Ads</li>
-        <li>Google Ads</li>
-        <li>TikTok Ads</li>
-        <li>YouTube Ads</li>
-      </ul>
-    </div>
-
-    <div class="stack-col">
-      <h3>Marketplaces</h3>
-      <ul>
-        <li>Amazon Ads</li>
-        <li>Amazon Seller Central</li>
-        <li>Mercado Libre Ads</li>
-        <li>Mercado Libre Seller</li>
-      </ul>
-    </div>
-
-    <div class="stack-col">
-      <h3>Analytics y tracking</h3>
-      <ul>
-        <li>GA4</li>
-        <li>GTM Web + Server</li>
-        <li>Meta CAPI</li>
-        <li>TikTok Events API</li>
-      </ul>
-    </div>
-
-    <div class="stack-col">
-      <h3>eCommerce</h3>
-      <ul>
-        <li>Shopify / Shopify Plus</li>
-        <li>VTEX</li>
-        <li>Magento</li>
-        <li>WordPress / WooCommerce</li>
-        <li>Tiendanube</li>
-      </ul>
-    </div>
-
-    <div class="stack-col">
-      <h3>Email y CRM</h3>
-      <ul>
-        <li>Klaviyo</li>
-        <li>Mailchimp</li>
-        <li>Odoo CRM</li>
-        <li>HubSpot</li>
-      </ul>
-    </div>
-
-    <div class="stack-col">
-      <h3>Productividad y AI</h3>
-      <ul>
-        <li>Claude</li>
-        <li>ChatGPT</li>
-        <li>Gemini</li>
-        <li>HeyGen</li>
-        <li>Notion</li>
-        <li>Loom</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Contacto</h2>
-  <p>Disponible para consultoría y proyectos.</p>
-
-  <ul class="contact-list">
-    <li><strong>Email</strong> <a href="mailto:diegovaldivia26@gmail.com" class="link">diegovaldivia26@gmail.com</a></li>
-    <li><strong>LinkedIn</strong> <a href="https://www.linkedin.com/in/soydiegovaldivia/" target="_blank" rel="noopener" class="link">linkedin.com/in/soydiegovaldivia</a></li>
-    <li><strong>Idiomas</strong> Español · English</li>
-  </ul>
-</section>
-
-</div>
-
-<footer>
-  © Diego Valdivia · 2026
-</footer>
-
+<script>
+(function () {
+  var btn = document.getElementById('copy');
+  var el = document.getElementById('email');
+  btn.addEventListener('click', function () {
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(el);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Seleccionado';
+    };
+    try {
+      navigator.clipboard.writeText(el.textContent).then(function () {
+        btn.textContent = 'Copiado';
+        setTimeout(function () { btn.textContent = 'Copiar'; }, 1600);
+      }, fallback);
+    } catch (e) { fallback(); }
+  });
+})();
+</script>
 </body>
 </html>
