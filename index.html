@@ -56,6 +56,13 @@ p { max-width: 64ch; color: var(--ink-2); }
 @media (max-width: 760px) { .bar nav { display: none; } }
 .status { display: inline-flex; align-items: center; gap: .45rem; font-size: .84rem; color: var(--ink-2); white-space: nowrap; }
 .status i { width: .5rem; height: .5rem; border-radius: 50%; background: var(--up); }
+.bar-right { display: flex; align-items: center; gap: 1rem; }
+.lang { font: inherit; font-size: .82rem; font-weight: 700; display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: transparent; cursor: pointer; padding: 0; }
+.lang span { padding: .3rem .55rem; color: var(--ink-3); }
+.lang span.on { background: var(--accent); color: #fff; }
+:root[data-theme="dark"] .lang span.on { color: #0f1114; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .lang span.on { color: #0f1114; } }
+@media (max-width: 420px) { .status { display: none; } }
 
 /* HERO */
 .hero { padding-block: 5rem 3rem; }
@@ -226,7 +233,10 @@ footer { border-top: 1px solid var(--line); padding-block: 1.5rem; font-size: .8
       <a href="#trayectoria">Trayectoria</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <span class="status"><i></i>Tomando proyectos</span>
+    <div class="bar-right">
+      <span class="status"><i></i>Tomando proyectos</span>
+      <button class="lang" id="lang" type="button" aria-label="Cambiar idioma / Change language"><span class="on" data-l="es">ES</span><span data-l="en">EN</span></button>
+    </div>
   </div>
 </header>
 
@@ -530,18 +540,217 @@ footer { border-top: 1px solid var(--line); padding-block: 1.5rem; font-size: .8
 
 <script>
 (function () {
+  var EN = {
+    "Casos": "Case studies",
+    "Más trabajo": "More work",
+    "Trayectoria": "Experience",
+    "Contacto": "Contact",
+    "Tomando proyectos": "Taking projects",
+    "Marketing Director · Consultor independiente": "Marketing Director · Independent consultant",
+    "Dirijo marketing de performance para marcas que venden en línea en México, Europa y Estados Unidos. Medios pagados, Amazon y Mercado Libre, Shopify y el tracking que hace falta para medir todo eso bien.": "I lead performance marketing for brands that sell online in Mexico, Europe and the United States. Paid media, Amazon and Mercado Libre, Shopify, and the tracking it takes to measure all of it properly.",
+    "Antes en Publicis (L'Oréal), Corebiz, Quinio y Levely. Profesor en la Escuela Bancaria y Comercial.": "Previously at Publicis (L'Oréal), Corebiz, Quinio and Levely. Lecturer at Escuela Bancaria y Comercial.",
+    "Presupuesto mensual (peak)": "Monthly budget (peak)",
+    "Marcas atendidas": "Brands served",
+    "Mercados activos": "Active markets",
+    "Docente en EBC": "Lecturer at EBC",
+    "Desde 2018": "Since 2018",
+    "Cifras en variaciones y ratios, 2026": "Figures shown as changes and ratios, 2026",
+    "Casino y Sportsbook · Meta, Google, TikTok · GA4 server-side": "Online casino and sportsbook · Meta, Google, TikTok · Server-side GA4",
+    "Entré a ordenar la medición y terminé llevando todo el performance. Con la señal de registro y depósito completa, las plataformas empezaron a optimizar hacia el usuario que sí deposita.": "I came in to fix measurement and ended up running all of performance. With full sign-up and deposit signal, the platforms started optimizing toward users who actually deposit.",
+    "primeros depósitos en septiembre vs agosto, con la misma inversión": "first-time deposits in September vs August, on the same spend",
+    "costo por depósito entre julio y septiembre": "cost per deposit from July to September",
+    "costo por registro en Meta en un mes": "cost per sign-up on Meta in one month",
+    "ticket promedio después de recuperar la señal": "average ticket after restoring the signal",
+    "Qué hice": "What I did",
+    "Tracking híbrido web y server-side: GA4, GTM Server, Meta CAPI y TikTok Events.": "Hybrid web and server-side tracking: GA4, GTM Server, Meta CAPI and TikTok Events.",
+    "Copies por etapa de funnel y por tipo de usuario: nuevo, registrado sin depósito y jugador de casino.": "Copy by funnel stage and user type: new, registered without deposit, and casino player.",
+    "Estudio de demanda de \"giros gratis\" en Google: volumen, competencia, CPC y riesgos de marca.": "Demand study for \"free spins\" on Google: volume, competitors, CPC and brand risks.",
+    "Reporte mensual con lectura por canal y acciones para el mes siguiente.": "Monthly report with a read on each channel and actions for the next month.",
+    "Qué aprendimos": "What we learned",
+    "Meta llena el funnel pero el depósito cierra por Direct. Si se mide solo con GA4 a último clic, Meta parece estar cayendo cuando en realidad trae a la gente que deposita después.": "Meta fills the funnel but deposits close through Direct. Measured only with last-click GA4, Meta looks like it is dropping when it is actually bringing in the people who deposit later.",
+    "Usuarios nuevos que se registran": "New users who sign up",
+    "Jun a sep 2026": "Jun to Sep 2026",
+    "Conversión de usuario nuevo a registro: junio 10.8%, julio 16.2%, agosto 17.8%, septiembre 18.5%": "New user to sign-up conversion: June 10.8%, July 16.2%, August 17.8%, September 18.5%",
+    "Ago": "Aug",
+    "De cada 100 usuarios nuevos se registraban 11 en junio. En septiembre, 18.5. Fuente: GA4.": "Out of every 100 new users, 11 signed up in June. In September, 18.5. Source: GA4.",
+    "Por dónde cierran los depósitos": "Where deposits close",
+    "% de FTD, sep 2026": "% of FTD, Sep 2026",
+    "Direct 61.5%, Paid Social 18.6%, Orgánico 10.6%, Paid Search 8.1%, Otros 1.2%": "Direct 61.5%, Paid Social 18.6%, Organic 10.6%, Paid Search 8.1%, Other 1.2%",
+    "Orgánico 10.6%": "Organic 10.6%",
+    "Otros 1.2%": "Other 1.2%",
+    "Meta trae el 59% de los registros del mes, pero el depósito aterriza en Direct.": "Meta brings 59% of the month's sign-ups, but deposits land in Direct.",
+    "Grip deportivo · Shopify EU, USA y MX · Amazon · Mercado Libre · Klaviyo": "Sports grip · Shopify EU, USA and MX · Amazon · Mercado Libre · Klaviyo",
+    "Tres tiendas, tres monedas y tres negocios distintos: en Europa manda el mayoreo, en Estados Unidos el retail y en México los dos, más Mercado Libre. Llevo el marketing de las tres con un reporte mensual por mercado.": "Three stores, three currencies and three different businesses: wholesale leads in Europe, retail in the US, and Mexico has both plus Mercado Libre. I run marketing for all three with a monthly report per market.",
+    "ROAS en Mercado Libre Ads, el mejor retorno del portafolio": "ROAS on Mercado Libre Ads, the best return in the portfolio",
+    "México en julio, un mes que los dos años anteriores cayó entre 11% y 17%": "Mexico in July, a month that fell 11% to 17% in each of the previous two years",
+    "CAC de cliente nuevo en México, con 29% menos inversión en Meta": "new-customer CAC in Mexico, with 29% less Meta spend",
+    "MER B2C en Estados Unidos de junio a julio": "B2C MER in the US from June to July",
+    "Programa de UGC con atletas de Hyrox, pádel, calistenia y pole, con flujo de guiones automatizado.": "UGC program with Hyrox, padel, calisthenics and pole athletes, with an automated script workflow.",
+    "Diagnóstico por SKU en Amazon Italia y Alemania: roturas de inventario con anuncios encendidos y productos que gastaban más de lo que vendían.": "SKU-level diagnosis on Amazon Italy and Germany: stockouts with ads still running and products spending more than they sold.",
+    "PDPs con bundles y add-ons, empezando por Europa.": "Product pages with bundles and add-ons, starting with Europe.",
+    "Retención de cuentas B2B en Europa, que recompran cada 94 días en promedio.": "Retention of B2B accounts in Europe, which reorder every 94 days on average.",
+    "Un guion UGC por dentro": "Inside a UGC script",
+    "Tres aperturas grabadas por separado. Se queda la que retiene más.": "Three openings shot separately. The one that holds attention best stays.",
+    "Antes": "Before",
+    "Qué usaba (vendas, magnesio) y en qué momento le fallaba.": "What they used before (tape, chalk) and when it failed them.",
+    "Cambio": "Switch",
+    "La razón técnica, contada como coach o competidor.": "The technical reason, told as a coach or competitor.",
+    "Prueba": "Proof",
+    "Demo en barra o aparato, sin cortes.": "Demo on the bar or apparatus, no cuts.",
+    "Cierre": "Close",
+    "CTA según mercado: tienda, Amazon o Mercado Libre.": "CTA by market: store, Amazon or Mercado Libre.",
+    "Tasa de conversión por tienda": "Conversion rate by store",
+    "Conversión: USA 8.19%, Europa 1.79%, México 1.46%, objetivo 4%": "Conversion: USA 8.19%, Europe 1.79%, Mexico 1.46%, target 4%",
+    "Europa": "Europe",
+    "México": "Mexico",
+    "objetivo 4%": "target 4%",
+    "Estados Unidos convierte cuatro veces más que Europa y México, y es el único mercado donde el costo de adquirir un cliente se recupera en la primera compra. Por eso el trabajo de CRO arranca en Europa y México.": "The US converts four times better than Europe and Mexico, and it is the only market where the cost of acquiring a customer is recovered on the first order. That is why CRO work starts in Europe and Mexico.",
+    "Skin, hair, sun y lip care · Relanzamiento premium · Shopify MX": "Skin, hair, sun and lip care · Premium relaunch · Shopify MX",
+    "Estamos relanzando la marca en México con un precio premium. Trabajé la identidad, la tienda, el SEO de colecciones y el storytelling de ingredientes, para que el precio se sostenga por el producto y no por el descuento.": "We are relaunching the brand in Mexico at a premium price. I worked on the identity, the store, collection SEO and ingredient storytelling, so the price is backed by the product and not by discounts.",
+    "Proyecto propio": "Own project",
+    "Una app para compartir el trayecto diario al trabajo solo con gente de tu red: contactos directos o conocidos de tus conocidos. Quien maneja publica su ruta fija y quien viaja se suma. La app no cobra ni procesa pagos.": "An app to share the daily commute only with people in your network: direct contacts or friends of friends. Drivers post their fixed route and riders join. The app does not charge or process payments.",
+    "Hice el concepto, el naming, la marca, el producto, el modelo de negocio y el contenido de lanzamiento.": "I created the concept, naming, brand, product, business model and launch content.",
+    "Ver viaxi.app ↗": "Visit viaxi.app ↗",
+    "Brand book y guía de tono": "Brand book and tone guide",
+    "Marca": "Brand",
+    "PRD del MVP y círculos de confianza": "MVP PRD and trust circles",
+    "Producto": "Product",
+    "Pitch deck para ronda seed": "Seed round pitch deck",
+    "Negocio": "Business",
+    "Marco legal y matriz de riesgos": "Legal framework and risk matrix",
+    "Espacios publicitarios y lealtad": "Ad placements and loyalty",
+    "Monetización": "Monetization",
+    "Calendario editorial de Instagram": "Instagram editorial calendar",
+    "Contenido": "Content",
+    "Directo, en agencia o en consultoría": "Direct, agency-side or as a consultant",
+    "Canal": "Channel",
+    "Performance en Meta, Google y TikTok desde Levely, y producción de videos UGC para sus campañas.": "Performance on Meta, Google and TikTok at Levely, and UGC video production for their campaigns.",
+    "Amazon Search y DSP para la división LDB en Hot Sale 2024 y reporting de Amazon para todas las divisiones. Vía Publicis.": "Amazon Search and DSP for the LDB division during Hot Sale 2024, plus Amazon reporting for every division. Through Publicis.",
+    "Consultoría de performance y CRO desde Corebiz.": "Performance and CRO consulting at Corebiz.",
+    "Campañas digitales y propuesta de medios anual, en México, Colombia, Perú y Australia.": "Digital campaigns and annual media plans in Mexico, Colombia, Peru and Australia.",
+    "Campañas y planeación de presupuesto por objetivo desde Levely.": "Campaigns and goal-based budget planning at Levely.",
+    "Activo": "Active",
+    "Secciones Liquid a la medida: guía de tallas con pestañas, quiz, hero y grid de colecciones. Creativos para el kit \"Mi Primera Menstruación\".": "Custom Liquid sections: tabbed size guide, quiz, hero and collections grid. Ad creative for the \"My First Period\" kit.",
+    "Mejoras a la plataforma de reclutamiento: flujo nuevo en el formulario, precios, preguntas frecuentes y legales.": "Improvements to the recruiting platform: new form flow, pricing, FAQ and legal pages.",
+    "Desarrollo y soporte de la tienda. Encontré el conflicto entre apps que bloqueaba los clics en móvil.": "Store development and support. Found the app conflict that was blocking taps on mobile.",
+    "BPN Pro y ZamnaMed": "BPN Pro and ZamnaMed",
+    "Campañas y bundles para suplementos de sueño, enfoque y adaptógenos.": "Campaigns and bundles for sleep, focus and adaptogen supplements.",
+    "Leads para venta de inmuebles y crédito hipotecario, con forecast de alcance y propuesta SEO.": "Leads for real estate sales and mortgages, with reach forecasting and an SEO proposal.",
+    "Lo que recibe un cliente": "What a client gets",
+    "Un reporte que se lee en cinco minutos": "A report you can read in five minutes",
+    "Cada canal contra el mes anterior, hallazgos numerados y una acción por cada uno.": "Every channel against the previous month, numbered findings and one action for each.",
+    "Tracking que se puede auditar": "Tracking you can audit",
+    "GA4, GTM web y server, CAPI y Events API. Cuando el panel y la tienda no cuadran, encuentro dónde se rompe.": "GA4, GTM web and server, CAPI and Events API. When the ad platform and the store don't match, I find where it breaks.",
+    "Estudios antes de invertir": "Research before spending",
+    "Volumen de búsqueda, CPC estimado, qué hace la competencia y qué riesgo tiene entrar.": "Search volume, estimated CPC, what competitors do and what the risk is of going in.",
+    "Creativo con datos": "Data-driven creative",
+    "Copies por etapa del funnel, guiones UGC por deporte y qué anuncios pagan y cuáles hay que apagar.": "Copy by funnel stage, UGC scripts by sport, and which ads pay off and which to turn off.",
+    "Ejemplo de lámina de resumen ejecutivo mensual": "Example monthly executive summary slide",
+    "Resumen ejecutivo · Performance": "Executive summary · Performance",
+    "Septiembre": "September",
+    "Tercer mes seguido de crecimiento en depósitos": "Third straight month of deposit growth",
+    "sesiones": "sessions",
+    "registros": "sign-ups",
+    "depósitos": "deposits",
+    "1. Social siembra, no cierra.": "1. Social plants, it doesn't close.",
+    "Meta trae 59% de los registros y 19% de los depósitos.": "Meta brings 59% of sign-ups and 19% of deposits.",
+    "2. Direct cierra el negocio.": "2. Direct closes the business.",
+    "53% de las sesiones y 61% de los depósitos.": "53% of sessions and 61% of deposits.",
+    "Primera lámina de un reporte real (PlayCity, septiembre 2026), con las cifras en variación.": "First slide of a real report (PlayCity, September 2026), with figures shown as changes.",
+    "2018 a hoy": "2018 to today",
+    "Periodo": "Period",
+    "Rol": "Role",
+    "Dónde": "Where",
+    "2024 a hoy": "2024 to today",
+    "Marketing Director y consultor independiente": "Marketing Director and independent consultant",
+    "Monkey Hands, PlayCity, Ilhũ y otras": "Monkey Hands, PlayCity, Ilhũ and others",
+    "Feb a ago 2024": "Feb to Aug 2024",
+    "Oct 2023 a feb 2024": "Oct 2023 to Feb 2024",
+    "Nov 2022 a oct 2023": "Nov 2022 to Oct 2023",
+    "Feb 2021 a oct 2022": "Feb 2021 to Oct 2022",
+    "Digital Analyst y CRO": "Digital Analyst and CRO",
+    "Feb 2020 a ene 2021": "Feb 2020 to Jan 2021",
+    "MSD Salud Animal": "MSD Animal Health",
+    "Oct 2018 a ene 2020": "Oct 2018 to Jan 2020",
+    "RFP Group · 6 cadenas de farmacias": "RFP Group · 6 pharmacy chains",
+    "Marcas": "Brands",
+    "En negro, activas en 2026": "In black, active in 2026",
+    "Presupuestos gestionados de 30 mil a 16 millones de pesos al mes en medios pagados.": "Managed budgets from 30 thousand to 16 million pesos per month in paid media.",
+    "Docencia y herramientas": "Teaching and tools",
+    "Profesor en la Escuela Bancaria y Comercial.": "Lecturer at Escuela Bancaria y Comercial.",
+    "Doy Marketing Digital, Campañas Digitales, Plan de Marketing, Pricing y Gestión de Redes Sociales, con módulos prácticos de Meta Ads y Google Ads. Lo que pasa en los proyectos llega al aula, y explicarlo en clase me obliga a entenderlo mejor.": "I teach Digital Marketing, Digital Campaigns, Marketing Planning, Pricing and Social Media Management, with hands-on Meta Ads and Google Ads modules. What happens in client work reaches the classroom, and explaining it in class makes me understand it better.",
+    "Maestría": "Master's",
+    "Educación Basada en Competencias, UVM": "Competency-Based Education, UVM",
+    "Licenciatura": "Bachelor's",
+    "Ciencias de la Comunicación, UNITEC": "Communication Sciences, UNITEC",
+    "Diplomados": "Diplomas",
+    "Marketing Digital (ADM) y Administración de Marketing (UNITEC)": "Digital Marketing (ADM) and Marketing Management (UNITEC)",
+    "Certificaciones": "Certifications",
+    "Amazon Ads y DSP, Seller Central, Mercado Libre Ads y Seller": "Amazon Ads and DSP, Seller Central, Mercado Libre Ads and Seller",
+    "Medición": "Measurement",
+    "GA4, GTM web y server, Meta CAPI, TikTok Events API": "GA4, GTM web and server, Meta CAPI, TikTok Events API",
+    "Shopify y Shopify Plus, VTEX, Magento, WooCommerce, Tiendanube, Bubble": "Shopify and Shopify Plus, VTEX, Magento, WooCommerce, Tiendanube, Bubble",
+    "Email y CRM": "Email and CRM",
+    "AI y trabajo": "AI and workflow",
+    "Idiomas": "Languages",
+    "Español e inglés": "Spanish and English",
+    "¿Trabajamos juntos?": "Let's work together",
+    "Disponible para consultoría, dirección de marketing y proyectos puntuales.": "Available for consulting, marketing leadership and one-off projects.",
+    "Copiar": "Copy"
+  };
+  var UI = { es: { copied: 'Copiado', selected: 'Seleccionado', copy: 'Copiar' }, en: { copied: 'Copied', selected: 'Selected', copy: 'Copy' } };
+  var current = 'es';
+
+  // Guarda el texto original de cada nodo para poder volver al español
+  var nodes = [];
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: function (n) {
+      var p = n.parentNode && n.parentNode.nodeName;
+      if (p === 'SCRIPT' || p === 'STYLE') return NodeFilter.FILTER_REJECT;
+      return n.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  while (walker.nextNode()) {
+    var n = walker.currentNode;
+    var key = n.nodeValue.replace(/\s+/g, ' ').trim();
+    if (EN[key]) nodes.push({ n: n, es: n.nodeValue, en: n.nodeValue.replace(/\S[\s\S]*\S|\S/, EN[key]) });
+  }
+  var labeled = [];
+  document.querySelectorAll('[aria-label]').forEach(function (el) {
+    var v = el.getAttribute('aria-label');
+    if (EN[v]) labeled.push({ el: el, es: v, en: EN[v] });
+  });
+
+  var langBtn = document.getElementById('lang');
+  function setLang(l) {
+    current = l;
+    nodes.forEach(function (o) { o.n.nodeValue = o[l]; });
+    labeled.forEach(function (o) { o.el.setAttribute('aria-label', o[l]); });
+    document.documentElement.lang = l;
+    var cb = document.getElementById('copy'); if (cb) cb.textContent = UI[l].copy;
+    langBtn.querySelectorAll('span').forEach(function (s) { s.classList.toggle('on', s.getAttribute('data-l') === l); });
+    try { localStorage.setItem('book-lang', l); } catch (e) {}
+  }
+  langBtn.addEventListener('click', function () { setLang(current === 'es' ? 'en' : 'es'); });
+
+  var start = 'es';
+  if (location.hash === '#en') start = 'en';
+  else { try { if (localStorage.getItem('book-lang') === 'en') start = 'en'; } catch (e) {} }
+  if (start === 'en') setLang('en');
+
+  // Copiar correo
   var btn = document.getElementById('copy');
   var el = document.getElementById('email');
   btn.addEventListener('click', function () {
     var fallback = function () {
       var r = document.createRange(); r.selectNodeContents(el);
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      btn.textContent = 'Seleccionado';
+      btn.textContent = UI[current].selected;
     };
     try {
       navigator.clipboard.writeText(el.textContent).then(function () {
-        btn.textContent = 'Copiado';
-        setTimeout(function () { btn.textContent = 'Copiar'; }, 1600);
+        btn.textContent = UI[current].copied;
+        setTimeout(function () { btn.textContent = UI[current].copy; }, 1600);
       }, fallback);
     } catch (e) { fallback(); }
   });
